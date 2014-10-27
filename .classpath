@@ -2,5 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/andersliltorp/Documents/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/andersliltorp/Documents/ibatis.jar"/>
+	<classpathentry kind="lib" path="/Users/andersliltorp/Documents/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/andersliltorp/Documents/commons-lang-2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/Users/andersliltorp/Desktop/mysql-connector-java-5.1.32/mysql-connector-java-5.1.32-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
