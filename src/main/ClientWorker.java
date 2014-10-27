@@ -38,9 +38,9 @@ public class ClientWorker implements  Runnable{
 			System.out.println("Besked modtaget!");
 			//Sysout recieved message
 			System.out.println("Received: " + ny);
-			String returnSvar = GS.GiantSwitchMethod(ny);
+			GS.GiantSwitchMethod(ny);
 			//Sends the capitalized message back to client!!
-			outToClient.writeBytes(returnSvar + "\n");
+			outToClient.writeBytes("Executed: " + ny);
 			System.out.println("svar sendt");
 			//BufferedWriter writer = new BufferedWriter(arg0)
 		}catch(Exception exception){

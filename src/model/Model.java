@@ -90,7 +90,7 @@ public abstract class Model {
 
             getConnection(false);
 
-            if (getConn().isValid(5)) //5 seconds
+            if (getConn().isValid(5000)) //5 seconds
                 return true;
 
         } catch (SQLException e) {

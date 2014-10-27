@@ -24,7 +24,7 @@ public class SwitchMethods extends Model
 	public String createNewCalendar (String userName, String calendarName, int privatePublic) throws SQLException
 	{
 		String stringToBeReturned ="";
-		getConn();
+		testConnection();
 		if(authenticateNewCalendar(calendarName) == false)
 		{
 			addNewCalendar(calendarName, userName, privatePublic);
@@ -44,9 +44,8 @@ public class SwitchMethods extends Model
 		testConnection();
 		boolean authenticate = false;
 		
-		resultSet= qb.selectFrom("calendar").where("name", "=", newCalendarName).ExecuteQuery();
+		resultSet = qb.selectFrom("calendar").where("name", "=", newCalendarName).ExecuteQuery();
 				
-				//("select * from test.calendar where Name = '"+newCalendarName+"';");
 		while(resultSet.next())
 		{
 			authenticate = true;
