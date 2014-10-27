@@ -29,7 +29,7 @@ public class GUILogic {
 		screen.getUserInfo().addActionListener(new UserInfoActionListener());
 		screen.getNoteList().addActionListener(new NoteListActionListener());
 		screen.getUserList().addActionListener(new UserListActionListener());
-		screen.getEventlist().addActionListener(new EventListActionListener());
+		screen.getEventList().addActionListener(new EventListActionListener());
 		screen.getAddEventGUI().addActionListener(new AddEventGUIActionListener());
 		screen.getAddUser().addActionListener(new AddUserActionListener());
 
@@ -214,11 +214,17 @@ public class GUILogic {
 	private class EventListActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			if (e.getSource() == screen.getEventlist().getBtnMainMenu()){
+			if (e.getSource() == screen.getEventList().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getEventlist().getBtnLogout()){
+			if (e.getSource() == screen.getEventList().getBtnLogout()){
 				screen.show(Screen.LOGIN);
+			}
+			if (e.getSource() == screen.getEventList().getBtnAdd()){
+				
+			}
+			if (e.getSource() == screen.getEventList().getBtnDelete()){
+				
 			}
 		}
 	}

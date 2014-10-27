@@ -24,8 +24,8 @@
 	import javax.swing.border.BevelBorder;
 	import javax.swing.border.MatteBorder;
 	import javax.swing.JTextPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+	import java.awt.event.ActionListener;
+	import java.awt.event.ActionEvent;
 
 
 	public class EventList extends JPanel {
@@ -62,11 +62,11 @@ import java.awt.event.ActionEvent;
 
 			Object[][] data = {
 
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) } };
+					{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
+					{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
+					{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
+					{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
+					{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!", new Boolean(false) } };
 
 			final JTable table = new JTable(data, columnNames);
 			table.setSurrendersFocusOnKeystroke(true);

@@ -99,7 +99,7 @@ public class Screen extends JFrame {
 	public void show(String card) {
 		c.show(getContentPane(),  card);
 	}
-	public EventList getEventlist() {
+	public EventList getEventList() {
 		return eventList;
 	}
 	public AddEventGUI getAddEventGUI() {
