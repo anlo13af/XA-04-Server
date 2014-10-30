@@ -25,15 +25,15 @@ public class SwitchMethods extends Model
 	{
 		String stringToBeReturned ="";
 		testConnection();
-		//if(authenticateNewCalendar(calendarName) == false)
-		//{
+		if(authenticateNewCalendar(calendarName) == false)
+		{
 			addNewCalendar(calendarName, userName, privatePublic);
 			stringToBeReturned = "The new calendar has been created!";
-		//}
-		//else
-		//{
-		//	stringToBeReturned = "The new calendar has not been created!";
-		//}
+		}
+		else
+		{
+			stringToBeReturned = "The new calendar has not been created!";
+		}
 		
 		
 		return stringToBeReturned;
