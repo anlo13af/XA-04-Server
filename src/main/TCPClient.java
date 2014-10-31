@@ -11,11 +11,14 @@ public class TCPClient {
 	public static void main(String[] args) throws Exception {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		CreateCalendar CC = new CreateCalendar();
-		CC.setCalendarName("Din mors kalender");
-		CC.setPublicOrPrivate(1);
-		CC.setUserName("John");
-		String gsonString = gson.toJson(CC);
+		DeleteCalendar DC = new DeleteCalendar();
+		DC.setCalendarName("Din mors kalender");
+		DC.setUserName("John");
+		//CreateCalendar CC = new CreateCalendar();
+		//CC.setCalendarName("Din mors kalender");
+		//CC.setPublicOrPrivate(1);
+		//CC.setUserName("John");
+		String gsonString = gson.toJson(DC);
 		//System.out.println(CC);
 		System.out.println(gsonString);
 
