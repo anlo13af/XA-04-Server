@@ -78,46 +78,45 @@ public class SwitchMethods extends Model
 	
 	public String removeCalendar (String userName, String calendarName) throws SQLException
 	{
-		String stringToBeReturend = "";
+		String stringToBeReturned = "";
 		String usernameOfCreator ="";
 		String calendarExists = "";
 		resultSet = qb.selectFrom("Calendar").where("Name", "=", calendarName).ExecuteQuery();
-				
+
 //				("select * from calendar where Name = '"+calendarName+"';");
 		while(resultSet.next())
 		{
 			calendarExists = resultSet.toString();
 		}
 		if(!calendarExists.equals(""))
-		{
+		{	
 			String [] value = {"CreatedBy"};
 			resultSet = qb.selectFrom(value, "Calendar").where("Name", "=", calendarName).ExecuteQuery();
 			while(resultSet.next())
 			{
-				usernameOfCreator = resultSet.toString();
-				System.out.println(usernameOfCreator);
+				usernameOfCreator = resultSet.getString("CreatedBy");
 			}
 			if(!usernameOfCreator.equals(userName))
 			{
-				stringToBeReturend = "Only the creator of the calendar is able to delete it.";
+				stringToBeReturned = "Only the creator of the calendar is able to delete it.";
 			}
 			else
 			{
 				String [] keys = {"Active"};
 				String [] values = {"2"};
 				qb.update("Calendar", keys, values).where("Name", "=", calendarName).Execute();
-				stringToBeReturend = "Calendar has been set inactive";
+				stringToBeReturned = "Calendar has been set inactive";
 			}
-			stringToBeReturend = resultSet.toString();
+			stringToBeReturned = resultSet.toString();
 		}
 		else
 		{
-			stringToBeReturend = "The calendar you are trying to delete, does not exists.";
+			stringToBeReturned = "The calendar you are trying to delete, does not exists.";
 		}
 		
 		
 		
-		return stringToBeReturend;
+		return stringToBeReturned;
 	}
 	
 	
