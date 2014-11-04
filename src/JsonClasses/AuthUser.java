@@ -2,7 +2,7 @@ package JsonClasses;
 
 public class AuthUser implements java.io.Serializable
 {
-	private  final long serialVersionUID = 2L;
+	private  final long serialVersionUID = 1L;
 	private String overallID = "logIn";
 	private String email;
 	private String password;
@@ -24,7 +24,7 @@ public class AuthUser implements java.io.Serializable
 	public String getAuthUserPassword() {
 		return password;
 	}
-	public void setAuthUserPassword(String userName) {
+	public void setAuthUserPassword(String password) {
 		this.password = password;
 	}
 	public boolean getAuthUserIsAdmin() {

@@ -19,7 +19,7 @@ public class AuthenticateUser {
 	 * @return
 	 * @throws Exception
 	 */
-	public int authenticate(String email, String password, boolean isAdmin) throws Exception {
+	public String authenticate(String email, String password, boolean isAdmin) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
@@ -30,10 +30,14 @@ public class AuthenticateUser {
 
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
+			System.out.println("Brugeren findes");
+			System.out.println(resultSet.getString("password"));
+			System.out.println(password);
 
 			// Hvis brugeren er aktiv
 			if(resultSet.getInt("active")==1)
 			{					
+				System.out.println("Brugeren er aktiv");
 				// Hvis passwords matcher
 				if(resultSet.getString("password").equals(password))
 				{
@@ -42,22 +46,24 @@ public class AuthenticateUser {
 					String[] key = {"type"};
 
 					resultSet = qb.selectFrom(key, "roles").where("userid", "=", new Integer(userID).toString()).ExecuteQuery();
-
 					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
-					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
-					{
-						return 0; // returnerer "0" hvis bruger/admin er godkendt
+					if(resultSet.next())
+					{ 
+						if(resultSet.getString("type").equals("admin") && isAdmin || (resultSet.getString("type").equals("user") && !isAdmin))
+						{
+							return "0"; // returnerer "0" hvis bruger/admin er godkendt
+						}
 					} else {
-						return 4; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
+						return "4"; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
 					}
 				} else {
-					return 3; // returnerer fejlkoden "3" hvis password ikke matcher
+					return "3"; // returnerer fejlkoden "3" hvis password ikke matcher
 				}
 			} else {
-				return 2; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
+				return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
 			}
 		} else {
-			return 1; // returnerer fejlkoden "1" hvis email ikke findes
-		}
+			return "1"; // returnerer fejlkoden "1" hvis email ikke findes
+		} return "sut";
 	}
 }

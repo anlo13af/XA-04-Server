@@ -12,6 +12,7 @@ import JsonClasses.DeleteCalendar;
 import com.google.gson.*;
 
 import databaseMethods.SwitchMethods;
+import model.user.*;
 
 public class GiantSwitch {
 	
@@ -25,6 +26,7 @@ public class GiantSwitch {
 		//ForecastModel forecastKlasse = new ForecastModel();
 		QOTDModel QOTDKlasse = new QOTDModel();
 		SwitchMethods SW = new SwitchMethods();
+		AuthenticateUser Auth = new AuthenticateUser();
 		
 		Gson gson = new GsonBuilder().create();
 		String answer = "";	
@@ -47,7 +49,8 @@ public class GiantSwitch {
 			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
 			System.out.println("Recieved logIn");
 			try {
-				answer = SW.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
+				answer = Auth.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
+				System.out.println(answer);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

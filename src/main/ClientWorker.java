@@ -41,7 +41,7 @@ public class ClientWorker implements  Runnable{
 			GS.GiantSwitchMethod(ny);
 			//Sends the capitalized message back to client!!
 			outToClient.writeBytes("Executed: " + ny);
-			System.out.println("svar sendt");
+			System.out.println("END");
 			//BufferedWriter writer = new BufferedWriter(arg0)
 		}catch(Exception exception){
 			System.err.print(exception);

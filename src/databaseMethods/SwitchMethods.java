@@ -140,13 +140,14 @@ public class SwitchMethods extends Model
 
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
-
 			// Hvis brugeren er aktiv
 			if(resultSet.getInt("active")==1)
-			{					
+			{			
+				System.out.println("Brugeren er aktiv");
 				// Hvis passwords matcher
 				if(resultSet.getString("password").equals(password))
 				{
+					System.out.println("Brugerens password matcher");
 					int userID = resultSet.getInt("userid");
 
 					String[] key = {"type"};

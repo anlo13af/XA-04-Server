@@ -3,24 +3,39 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import JsonClasses.*;
+import model.QOTD.*;
+import java.util.Scanner;
 
 public class TCPClient {
 	public static void main(String[] args) throws Exception {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		DeleteCalendar DC = new DeleteCalendar();
-		DC.setCalendarName("Din mors kalender");
-		DC.setUserName("John");
+		Scanner scan = new Scanner(System.in);
+		AuthUser AU = new AuthUser();
+		System.out.println("Enter email: ");
+		String email = scan.nextLine();
+		System.out.println("Enter password: ");
+		String password = scan.nextLine();
+		System.out.println(password);
+		AU.setAuthUserEmail(email);
+		AU.setAuthUserPassword(password);
+		AU.setAuthUserIsAdmin(true);
+		
+		//DeleteCalendar DC = new DeleteCalendar();
+		//DC.setCalendarName("Din mors kalender");
+		//DC.setUserName("John");
 		//CreateCalendar CC = new CreateCalendar();
 		//CC.setCalendarName("Din mors kalender");
 		//CC.setPublicOrPrivate(1);
 		//CC.setUserName("John");
-		String gsonString = gson.toJson(DC);
+		String gsonString = gson.toJson(AU);
 		//System.out.println(CC);
-		System.out.println(gsonString);
+		//System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 8888);
 		DataOutputStream outToServer = new DataOutputStream(
