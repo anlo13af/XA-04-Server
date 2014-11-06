@@ -107,7 +107,6 @@ public class SwitchMethods extends Model
 				qb.update("Calendar", keys, values).where("Name", "=", calendarName).Execute();
 				stringToBeReturned = "Calendar has been set inactive";
 			}
-			stringToBeReturned = resultSet.toString();
 		}
 		else
 		{
