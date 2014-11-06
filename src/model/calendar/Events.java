@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.joda.time.format.DateTimeFormatter;
+
 import model.QueryBuild.QueryBuilder;
 
 /**
@@ -27,8 +29,8 @@ public class Events {
 				int type = rs.getInt("type");
 				int location = rs.getInt("location");
 				int createdby = rs.getInt("createdby");
-
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy, M, d, ");
 				Date startDate = rs.getDate("start");
 				Time startTime = rs.getTime("start");
 
@@ -42,11 +44,9 @@ public class Events {
 				String stringType = String.valueOf(type);
 				String stringLocation = String.valueOf(location);
 				String stringCreatedby = String.valueOf(createdby);
-				//String stringStartDate = formatter.format(startDate);
-				String stringStartDate = String.valueOf(startDate);
+				String stringStartDate = formatter.format(startDate);
 				String stringStartTime = String.valueOf(startTime);
-				//String stringEndDate = formatter.format(endDate);
-				String stringEndDate = String.valueOf(endDate);
+				String stringEndDate = formatter.format(endDate);
 				String stringEndTime = String.valueOf(endTime);
 
 				ArrayList<String> alStart = new ArrayList<String>();
