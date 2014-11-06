@@ -38,13 +38,22 @@ public class ClientWorker implements  Runnable{
 			System.out.println("Besked modtaget!");
 			//Sysout recieved message
 			System.out.println("Received: " + ny);
-			GS.GiantSwitchMethod(ny);
+			String answer = GS.GiantSwitchMethod(ny);
 			//Sends the capitalized message back to client!!
-			outToClient.writeBytes("Executed: " + ny);
+			byte[] input = answer.getBytes();
+			byte key = (byte) 3.1470;
+			byte[] encrypted = input;
+			for (int i = 0; i < encrypted.length; i++)
+				encrypted[i] = (byte) (encrypted[i] ^ key);
+			System.out.println(encrypted);
+
+			outToClient.write(encrypted);
+			outToClient.flush();
+			
 			System.out.println("END");
 			//BufferedWriter writer = new BufferedWriter(arg0)
 		}catch(Exception exception){
-			System.err.print(exception);
+			System.err.println(exception);
 		}
 	}
 

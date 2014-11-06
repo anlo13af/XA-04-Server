@@ -1,5 +1,6 @@
 package main;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -13,6 +14,7 @@ import model.QOTD.*;
 import java.util.Scanner;
 
 public class TCPClient2 {
+	private static encryption cryp = new encryption();
 	
 	public static void main (String [] args) throws Exception{
 		
@@ -98,13 +100,17 @@ public class TCPClient2 {
 
 			outToServer.write(encrypted);
 			outToServer.flush();
-			switchy();
-			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
-			modifiedSentence = inFromServer.readLine();
-			System.out.println(modifiedSentence);
-			System.out.println("FROM SERVER: " + modifiedSentence);
+			
+			byte[] b = new byte[500000];
+			int count = clientSocket.getInputStream().read(b);
+			ByteArrayInputStream bais = new ByteArrayInputStream(b);
+			String ny = cryp.decrypt(b);
+			System.out.println(ny);
+			
+		
 			clientSocket.close();
+			switchy();
+			
 			
 		}
 }

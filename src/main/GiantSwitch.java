@@ -65,18 +65,21 @@ public class GiantSwitch {
 		 ** CALENDAR **
 		 *************/
 		case "createCalendar":
+			
 			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
 			System.out.println("Name of the new calendar: " + CC.getCalendarName());
 			System.out.println("User name: " + CC.getUserName());
 			System.out.println("Public or Private: " + CC.getPublicOrPrivate());
 			answer = SW.createNewCalendar(CC.getUserName(), CC.getCalendarName(), CC.getPublicOrPrivate());
+			
 			System.out.println(answer);
 			break;
-		
+			
 		case "deleteCalendar":
 			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
 			System.out.println(DC.getCalendarName());
 			answer = SW.deleteCalendar(DC.getUserName(), DC.getCalendarName());
+			
 			break;
 		
 		case "saveImportedCalendar":
@@ -137,6 +140,7 @@ public class GiantSwitch {
 			System.out.println("Error");
 			break;
 		}
+		
 		return answer;
 		
 	}
