@@ -52,6 +52,7 @@ public class QOTDModel {
     }
     
      	public void saveQuote() {
+     		
 
             /**
              * getting text from website and putiing into string
@@ -59,6 +60,7 @@ public class QOTDModel {
              */
             String json;
 			try {
+				
 				json = readUrl("http://dist-sso.it-kartellet.dk/quote/");
 			
             
@@ -66,15 +68,20 @@ public class QOTDModel {
     			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
     			
     			String quote = (String) jsonObject.get("quote");
-    			String author = (String) jsonObject.get("author");
-    			String topic = (String) jsonObject.get("topic");
+    			String newquote = quote.replaceAll("'", "''");
+
+
+    			//String author = (String) jsonObject.get("author");
+    	//		String topic = (String) jsonObject.get("topic");
 
     			
     			String[] keys = {"qotd"};
-    			String[] keys2 = {quote};
+    			String[] keys2 = {newquote};
     			
+    			//System.out.println(quote + author + topic);
     			
-    			qb.update("dailyupdate", keys, keys2).where("msg_type", "=", "1").Execute();
+    			qb.update("dailyupdate", keys, keys2).where("windspeed", "=", "100").Execute();
+    			//qb.update("dailyupdate", keys, keys2).where("msg_type", "=", "1").Execute();
     			
     	
 			} catch (Exception e) {
@@ -90,14 +97,23 @@ public class QOTDModel {
      * Afterwards we will make it into a json object so it can be printed out to the client.
      */
   	public String getQuote(){
+  		//System.out.println("test");
   		String q = "";
   		String[] key = {"qotd"};
+  		saveQuote(); 
   		try {
   			resultSet = qb.selectFrom("dailyupdate").all().ExecuteQuery();
 			while(resultSet.next()) {
-				q = resultSet.getString("qotd");
+				               
+				    q = resultSet.getString("qotd");
+				
+				
+				
+					
+					System.out.println("success med quote");
 			}
-		} catch (SQLException e) {
+				}
+  		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -113,8 +129,7 @@ public class QOTDModel {
 	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
 	     	
 	     	long timeSinceUpdate = date1 - date2; 
-	     	
-	     	
+	     
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 864000){
 	     		// return fresh weather data

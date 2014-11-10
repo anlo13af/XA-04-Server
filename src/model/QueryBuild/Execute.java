@@ -99,7 +99,7 @@ public class Execute extends Model {
      */
     public boolean Execute() throws SQLException {
         String sql = "";
-
+        System.out.println("kommer til execute");
         if (getQueryBuilder().isSoftDelete()) {
             sql = UPDATE + getQueryBuilder().getTableName() + " SET active = 0" +
                     WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " " + getWhere().getWhereValue() + ";  ";
@@ -121,6 +121,7 @@ public class Execute extends Model {
                 //String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(sql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
+                System.out.println(sql);
 
             } catch (SQLException e) {
                 e.printStackTrace();

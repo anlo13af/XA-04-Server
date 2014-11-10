@@ -122,7 +122,7 @@ public class GiantSwitch {
 		 ** QUOTE **
 		 **********/
 		case "getQuote":
-
+			System.out.println("case kører");
 		answer = QOTDKlasse.getQuote();
 			System.out.println(answer);
 			

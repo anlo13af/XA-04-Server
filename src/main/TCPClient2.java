@@ -23,7 +23,7 @@ public class TCPClient2 {
 	}
 	public static void switchy() throws Exception {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login");
+		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD");
 		int lol = scan.nextInt();
 		//System.out.println("password?");
 		//String password = scan.nextLine();
@@ -75,6 +75,22 @@ public class TCPClient2 {
 			
 			//String go = "AU";
 			gogogo(gsonString2);
+			break;
+		case 4 :
+			//System.out.println("email?");
+			//Scanner scan2 = new Scanner(System.in);
+			//String email = scan2.nextLine();
+			//System.out.println("pass?");
+			//String pass = scan2.nextLine();
+			GetQuote GQ = new GetQuote();			
+			//AU.setAuthUserEmail(email);
+			//AU.setAuthUserPassword(pass);
+			//AU.setAuthUserIsAdmin(true);
+			Gson gson3 = new GsonBuilder().create();
+			String gsonString3 = gson3.toJson(GQ);
+			
+			//String go = "AU";
+			gogogo(gsonString3);
 			break;
 		}
 			
