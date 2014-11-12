@@ -68,23 +68,25 @@ public class ForecastModel {
 
 	                 JSONObject innerObj = (JSONObject) i.next();
 
-	                 Date string_date = new Date((Long) innerObj.get("dt") * 1000L);
+	                 Date string_date = new Date((long) innerObj.get("dt") * 1000L);
 	                 String sh = string_date.toString();
 	                 
-	                 double  ws =  (double) innerObj.get("speed");
+	                 Object  ws = innerObj.get("speed");
                      String windspeed = String.valueOf(ws);
-                     //System.out.println(ws);
+                    // System.out.println(ws);
 	               
 	                 JSONObject temp = (JSONObject) innerObj.get("temp");
-	                 double celsius = (Double) temp.get("day");
+	                Object celsius =  temp.get("day");
+	                String temperature = String.valueOf(celsius);
+	              
 	                 
 	            
-	                 String temp1 = "10";
-	              
 	                 
 	              
 	                 
-	                 String temperatur = String.valueOf(celsius);
+	              
+	                 
+	                // String temperatur = String.valueOf(celsius);
 	                 
 	                 JSONArray subList = (JSONArray) innerObj.get("weather");
 
@@ -101,14 +103,14 @@ public class ForecastModel {
 	                 ResultSet forecast = null;
 	                 try {
 	                	String [] keys = {"date","apparentTemperature","summary","windspeed", "qotd"};
-	             		String [] values = {sh, temperatur, weatherDescription, windspeed, "shitson"};
+	             		String [] values = {sh, temperature, weatherDescription, windspeed, "shitson"};
 	             		qb.insertInto("dailyupdate", keys).values(values).Execute();
 						//forecast = qb.insertInto("dailyupdate", null).where("msg_type", "=", "forecast").ExecuteQuery();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	                 forecastList.add(new Forecast(sh, temperatur, weatherDescription));
+	                 forecastList.add(new Forecast(sh, "10", weatherDescription));
 	                 
 	             }
 	         } catch (ParseException ex) {
