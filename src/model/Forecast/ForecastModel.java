@@ -2,6 +2,8 @@ package model.Forecast;
 
 import model.QueryBuild.QueryBuilder;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,8 +16,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Iterator;
 
 public class ForecastModel {
@@ -65,13 +68,24 @@ public class ForecastModel {
 
 	                 JSONObject innerObj = (JSONObject) i.next();
 
-	                 Date date = new Date((Long) innerObj.get("dt") * 1000L);
-	                 String string_date = date.toString();
+	                 Date string_date = new Date((Long) innerObj.get("dt") * 1000L);
+	                 String sh = string_date.toString();
 	                 
+	                 double  ws =  (double) innerObj.get("speed");
+                     String windspeed = String.valueOf(ws);
+                     //System.out.println(ws);
+	               
 	                 JSONObject temp = (JSONObject) innerObj.get("temp");
 	                 double celsius = (Double) temp.get("day");
 	                 
+	            
+	                 String temp1 = "10";
+	              
+	                 
+	              
+	                 
 	                 String temperatur = String.valueOf(celsius);
+	                 
 	                 JSONArray subList = (JSONArray) innerObj.get("weather");
 
 	                 Iterator y = subList.iterator();
@@ -80,10 +94,21 @@ public class ForecastModel {
 	                     JSONObject childObj = (JSONObject) y.next();
 
 	                     weatherDescription = (String) childObj.get("description");
+	                
 
 	                 }
 	                 
-	                 forecastList.add(new Forecast(string_date, temperatur, weatherDescription));
+	                 ResultSet forecast = null;
+	                 try {
+	                	String [] keys = {"date","apparentTemperature","summary","windspeed", "qotd"};
+	             		String [] values = {sh, temperatur, weatherDescription, windspeed, "shitson"};
+	             		qb.insertInto("dailyupdate", keys).values(values).Execute();
+						//forecast = qb.insertInto("dailyupdate", null).where("msg_type", "=", "forecast").ExecuteQuery();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	                 forecastList.add(new Forecast(sh, temperatur, weatherDescription));
 	                 
 	             }
 	         } catch (ParseException ex) {
@@ -91,11 +116,15 @@ public class ForecastModel {
 	         } catch (NullPointerException ex) {
 	             ex.printStackTrace();
 	         }
+	        
+			
+			
 	         return forecastList;
 	     }
 	     
 	     // Henter vejrudsigten og gemmer de hentede data i en ArrayList
 	     public ArrayList<Forecast> getForecast() throws SQLException{
+	    	
 	     	QueryBuilder qb = new QueryBuilder();
 	     	Date date = new Date(); // Current date & time
 	     	long maxTimeNoUpdate = 3600; // Maximum one hour with no update
@@ -104,10 +133,11 @@ public class ForecastModel {
 	     	long date1 = date.getTime();
 	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
 	     	
-	     	long timeSinceUpdate = 3601; 
+	     	long timeSinceUpdate = 3599; 
 	     	
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 3600){
+	     		System.out.println("yaaaaaaay");
 	     		// return fresh weather data
 	     		return this.requestForecast();
 	     	} else {

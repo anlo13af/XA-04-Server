@@ -1,6 +1,9 @@
 package main;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import model.Forecast.Forecast;
+import model.Forecast.ForecastModel;
 import model.QOTD.QOTDModel;
 import model.calendar.Event;
 import model.note.Note;
@@ -25,6 +28,7 @@ public class GiantSwitch {
 		Note noteKlasse = new Note();
 		//ForecastModel forecastKlasse = new ForecastModel();
 		QOTDModel QOTDKlasse = new QOTDModel();
+		ForecastModel fm = new ForecastModel();
 		SwitchMethods SW = new SwitchMethods();
 		AuthenticateUser Auth = new AuthenticateUser();
 		
@@ -132,12 +136,20 @@ public class GiantSwitch {
 		 ** WEATHER **
 		 ************/
 
-		case "getClientForecast":
-			System.out.println("Recieved getClientForecast");
+		case "getWeather":
+			System.out.println("virker altså");
+			 ArrayList<Forecast> forecastList = fm.requestForecast();
+		        
+		        for (int i = 0; i < forecastList.size(); i++) {
+		        	System.out.println(forecastList.get(i).toString());
+		        }
+			answer = "virker altså";
+			//fm.getForecast();
+			System.out.println("Recieved weather");
 			break;
 		
 		default:
-			System.out.println("Error");
+			System.out.println("Error" + jsonString );
 			break;
 		}
 		
@@ -161,8 +173,8 @@ public class GiantSwitch {
 			return "deleteNote";
 		}else if  (ID.contains("deleteCalendar")){
 			return "deleteCalendar";
-		} else if (ID.contains("getClientForecast")) {
-			return "getClientForecast";
+		} else if (ID.contains("getWeather")) {
+			return "getWeather";
 		} else if (ID.contains("saveImportedCalendar")) {
 			return "saveImportedCalendar";
 		}else if (ID.contains("importCourse")) {

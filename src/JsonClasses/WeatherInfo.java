@@ -1,10 +1,19 @@
 package JsonClasses;
-public class WeatherInfo {
+public class WeatherInfo implements java.io.Serializable{
 	
+	private  final long serialVersionUID = 1L;
+	private String overallID = "getWeather";
 	private String weatherLocation;
 	private String weather;
 	private String temperature;
-	private String overallID = "weather";
+	
+	
+	public String getOverallID() {
+		return overallID;
+	}
+	public void setOverallID(String overallID) {
+		this.overallID = overallID;
+	}
 	
 	public String getWeatherLocation() {
 		return weatherLocation;
