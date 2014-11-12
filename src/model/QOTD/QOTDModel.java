@@ -51,7 +51,7 @@ public class QOTDModel {
  
     }
     
-     	public void saveQuote() {
+     	public static String saveQuote() {
      		
 
             /**
@@ -59,6 +59,7 @@ public class QOTDModel {
              * Making a new object of JSON, and prints out quote
              */
             String json;
+            String newquote = "";
 			try {
 				
 				json = readUrl("http://dist-sso.it-kartellet.dk/quote/");
@@ -68,7 +69,7 @@ public class QOTDModel {
     			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
     			
     			String quote = (String) jsonObject.get("quote");
-    			String newquote = quote.replaceAll("'", "''");
+    			newquote = quote.replaceAll("'", "''");
 
 
     			//String author = (String) jsonObject.get("author");
@@ -80,7 +81,7 @@ public class QOTDModel {
     			
     			//System.out.println(quote + author + topic);
     			
-    			qb.update("dailyupdate", keys, keys2).where("windspeed", "=", "100").Execute();
+    		//	qb.update("dailyupdate", keys, keys2).where("windspeed", "=", "100").Execute();
     			//qb.update("dailyupdate", keys, keys2).where("msg_type", "=", "1").Execute();
     			
     	
@@ -88,6 +89,7 @@ public class QOTDModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return newquote;
 			
     			
     }

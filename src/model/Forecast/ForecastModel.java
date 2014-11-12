@@ -1,5 +1,6 @@
 package model.Forecast;
 
+import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
 
 import org.joda.time.DateTime;
@@ -36,9 +37,10 @@ public class ForecastModel {
 	         String line;
 
 	         String result = "";
-
+	        // api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
 	         try {
-	             url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?lat=55.681589&lon=12.529092&cnt=14&mode=json&units=metric");
+	             //url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?lat=55.67886&lon=12.52975&cnt=14&mode=json&units=metric");
+	        	 url = new URL("http://api.openweathermap.org/data/2.5/forecast?lat=55.67886&lon=12.52975&&mode=json&units=metric");
 	             conn = (HttpURLConnection) url.openConnection();
 	             conn.setRequestMethod("GET");
 	             
@@ -65,18 +67,29 @@ public class ForecastModel {
 
 	             // take each value from the json array separately
 	             while (i.hasNext()) {
+	            	 String hey = "";
+	            	 
+	            	 hey = QOTDModel.saveQuote();
 
 	                 JSONObject innerObj = (JSONObject) i.next();
 
-	                 Date string_date = new Date((long) innerObj.get("dt") * 1000L);
-	                 String sh = string_date.toString();
+	                /* Date string_date = new Date((long) innerObj.get("dt") * 1000L);
+	                 String sh = string_date.toString();*/
+	                 String string_date = (String) innerObj.get("dt_txt");
+	                 //String sh = string_date.toString();
+	                 String sh = string_date;
 	                 
-	                 Object  ws = innerObj.get("speed");
-                     String windspeed = String.valueOf(ws);
-                    // System.out.println(ws);
+	                 
+	                 JSONObject speedy = (JSONObject) innerObj.get("wind");
+	                 Object ws =  speedy.get("speed");
+	                 String windspeed = String.valueOf(ws);
+	                 
+	                 /*Object  ws = innerObj.get("speed");
+                     String windspeed = String.valueOf(ws);*/
+                    
 	               
-	                 JSONObject temp = (JSONObject) innerObj.get("temp");
-	                Object celsius =  temp.get("day");
+	                 JSONObject temp = (JSONObject) innerObj.get("main");
+	                Object celsius =  temp.get("temp");
 	                String temperature = String.valueOf(celsius);
 	              
 	                 
@@ -103,7 +116,7 @@ public class ForecastModel {
 	                 ResultSet forecast = null;
 	                 try {
 	                	String [] keys = {"date","apparentTemperature","summary","windspeed", "qotd"};
-	             		String [] values = {sh, temperature, weatherDescription, windspeed, "shitson"};
+	             		String [] values = {sh, temperature, weatherDescription, windspeed, hey};
 	             		qb.insertInto("dailyupdate", keys).values(values).Execute();
 						//forecast = qb.insertInto("dailyupdate", null).where("msg_type", "=", "forecast").ExecuteQuery();
 					} catch (SQLException e) {
