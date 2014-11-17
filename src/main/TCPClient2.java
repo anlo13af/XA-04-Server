@@ -15,26 +15,29 @@ import java.util.Scanner;
 
 public class TCPClient2 {
 	private static encryption cryp = new encryption();
-	
+
 	public static void main (String [] args) throws Exception{
-		
-	switchy();
-		
+
+		switchy();
+
 	}
 	public static void switchy() throws Exception {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather");
+		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather \n6:AddUser");
 		int lol = scan.nextInt();
 		//System.out.println("password?");
 		//String password = scan.nextLine();
 		shit(lol);
-		
+
 	}
 	public static void shit(int lol) throws Exception {
+		String gsonString;
+		Gson gson = new GsonBuilder().create();
+		Scanner scan = new Scanner(System.in);
+
 		switch (lol){
 		case 1 :
 			System.out.println("Kalenders navn?");
-			Scanner scan = new Scanner(System.in);
 			String calendarName = scan.nextLine();
 			System.out.println("User name?");
 			String userName = scan.nextLine();
@@ -42,104 +45,90 @@ public class TCPClient2 {
 			CC.setCalendarName(calendarName);
 			CC.setPublicOrPrivate(1);
 			CC.setUserName(userName);
-			Gson gson = new GsonBuilder().create();
-			String gsonString = gson.toJson(CC);
+			gsonString = gson.toJson(CC);
 			gogogo(gsonString);
-			
-		break;
+			break;
+
 		case 2 : 
 			System.out.println("Kalenders navn?");
-			Scanner scan1 = new Scanner(System.in);
-			String calendarName1 = scan1.nextLine();
+			String calendarName1 = scan.nextLine();
 			System.out.println("User name?");
-			String userName1 = scan1.nextLine();
+			String userName1 = scan.nextLine();
 			DeleteCalendar DC = new DeleteCalendar();
 			DC.setCalendarName(calendarName1);
 			DC.setUserName(userName1);
-			Gson gson1 = new GsonBuilder().create();
-			String gsonString1 = gson1.toJson(DC);
-			gogogo(gsonString1);
+			gsonString = gson.toJson(DC);
+			gogogo(gsonString);
 			break;
+
 		case 3 :
 			System.out.println("email?");
-			Scanner scan2 = new Scanner(System.in);
-			String email = scan2.nextLine();
+			String email = scan.nextLine();
 			System.out.println("pass?");
-			String pass = scan2.nextLine();
+			String pass = scan.nextLine();
 			AuthUser AU = new AuthUser();			
 			AU.setAuthUserEmail(email);
 			AU.setAuthUserPassword(pass);
 			AU.setAuthUserIsAdmin(true);
-			Gson gson2 = new GsonBuilder().create();
-			String gsonString2 = gson2.toJson(AU);
-			
-			//String go = "AU";
-			gogogo(gsonString2);
+			gsonString = gson.toJson(AU);
+			gogogo(gsonString);
 			break;
+
 		case 4 :
-			//System.out.println("email?");
-			//Scanner scan2 = new Scanner(System.in);
-			//String email = scan2.nextLine();
-			//System.out.println("pass?");
-			//String pass = scan2.nextLine();
 			GetQuote GQ = new GetQuote();			
-			//AU.setAuthUserEmail(email);
-			//AU.setAuthUserPassword(pass);
-			//AU.setAuthUserIsAdmin(true);
-			Gson gson3 = new GsonBuilder().create();
-			String gsonString3 = gson3.toJson(GQ);
-			
-			//String go = "AU";
-			System.out.println(gsonString3);
-			gogogo(gsonString3);
+			gsonString = gson.toJson(GQ);
+			System.out.println(gsonString);
+			gogogo(gsonString);
 			break;
+
 		case 5 :
-			//System.out.println("email?");
-			//Scanner scan2 = new Scanner(System.in);
-			//String email = scan2.nextLine();
-			//System.out.println("pass?");
-			//String pass = scan2.nextLine();
 			WeatherInfo WI = new WeatherInfo();			
-			//AU.setAuthUserEmail(email);
-			//AU.setAuthUserPassword(pass);
-			//AU.setAuthUserIsAdmin(true);
-			Gson gson4 = new GsonBuilder().create();
-			String gsonString4 = gson4.toJson(WI);
+			gsonString = gson.toJson(WI);
+			System.out.println(gsonString);
+			gogogo(gsonString);
+			break;
 			
-			//String go = "AU";
-			System.out.println(gsonString4);
-			gogogo(gsonString4);
+		case 6:
+			System.out.println("Ny bruger email: ");
+			String newUserEmail = scan.nextLine();
+			System.out.println("Ny bruger password: ");
+			String newUserPassword = scan.nextLine();
+			AddUser AddU = new AddUser();
+			AddU.setEmail(newUserEmail);
+			AddU.setPassword(newUserPassword);
+			gsonString = gson.toJson(AddU);
+			gogogo(gsonString);
 			break;
 		}
-		}
-		
-			
-		public static void gogogo(String go) throws Exception{
-			String modifiedSentence;
-			Gson gson = new GsonBuilder().create();
+	}
 
-			Socket clientSocket = new Socket("localhost", 8888);
-			DataOutputStream outToServer = new DataOutputStream(
-					clientSocket.getOutputStream());
-			byte[] input = go.getBytes();
-			byte key = (byte) 3.1470;
-			byte[] encrypted = input;
-			for (int i = 0; i < encrypted.length; i++)
-				encrypted[i] = (byte) (encrypted[i] ^ key);
 
-			outToServer.write(encrypted);
-			outToServer.flush();
-			
-			byte[] b = new byte[500000];
-			int count = clientSocket.getInputStream().read(b);
-			ByteArrayInputStream bais = new ByteArrayInputStream(b);
-			String ny = cryp.decrypt(b);
-			System.out.println(ny);
-			
-		
-			clientSocket.close();
-			switchy();
-			
-			
-		}
+	public static void gogogo(String go) throws Exception{
+		String modifiedSentence;
+		Gson gson = new GsonBuilder().create();
+
+		Socket clientSocket = new Socket("localhost", 8888);
+		DataOutputStream outToServer = new DataOutputStream(
+				clientSocket.getOutputStream());
+		byte[] input = go.getBytes();
+		byte key = (byte) 3.1470;
+		byte[] encrypted = input;
+		for (int i = 0; i < encrypted.length; i++)
+			encrypted[i] = (byte) (encrypted[i] ^ key);
+
+		outToServer.write(encrypted);
+		outToServer.flush();
+
+		byte[] b = new byte[500000];
+		int count = clientSocket.getInputStream().read(b);
+		ByteArrayInputStream bais = new ByteArrayInputStream(b);
+		String ny = cryp.decrypt(b);
+		System.out.println(ny);
+
+
+		clientSocket.close();
+		switchy();
+
+
+	}
 }

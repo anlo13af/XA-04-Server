@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import model.Model;
 import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
+import model.user.encryptionAES;
 
 public class SwitchMethods extends Model
 {
@@ -60,6 +61,19 @@ public class SwitchMethods extends Model
 		qb.insertInto("calendar", keys).values(values).Execute();
 		
 //		doUpdate("insert into test.calendar (Name, Active, CreatedBy, PrivatePublic) VALUES ('"+newCalendarName+"', '1', '"+userName+"', '"+publicOrPrivate+"');");
+	}
+	public String addUser (String newUserEmail, String newUserPassword) throws Exception
+	{
+		String [] keys = {"email", "active", "password"};
+		String [] values = {newUserEmail, "1", encryptionAES.encrypt(newUserPassword)};
+		try {
+			qb.insertInto("users", keys).values(values).Execute();
+			return "0"; //Returnerer 0: brugeren er oprettet
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "1"; //Returnerer 1: Brugeren blev ikke oprettet
+		}
 	}
 	/**
 	 * Allows the client to delete a calendar

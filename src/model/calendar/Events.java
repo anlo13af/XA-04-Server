@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.joda.time.format.DateTimeFormatter;
@@ -29,8 +30,7 @@ public class Events {
 				int type = rs.getInt("type");
 				int location = rs.getInt("location");
 				int createdby = rs.getInt("createdby");
-			
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy, M, d, ");
+				
 				Date startDate = rs.getDate("start");
 				Time startTime = rs.getTime("start");
 
@@ -44,18 +44,16 @@ public class Events {
 				String stringType = String.valueOf(type);
 				String stringLocation = String.valueOf(location);
 				String stringCreatedby = String.valueOf(createdby);
-				String stringStartDate = formatter.format(startDate);
+				String stringStartDate = String.valueOf(startDate);
 				String stringStartTime = String.valueOf(startTime);
-				String stringEndDate = formatter.format(endDate);
+				String stringEndDate = String.valueOf(endDate);
 				String stringEndTime = String.valueOf(endTime);
 
 				ArrayList<String> alStart = new ArrayList<String>();
-				alStart.add(stringStartDate + "" + stringStartTime);
+				alStart.add(stringStartDate + " " + stringStartTime);
 
 				ArrayList<String> alEnd = new ArrayList<String>();
-				alEnd.add(stringEndDate + "" + stringEndTime);
-
-				System.out.println(stringStartDate + " " + stringStartTime);
+				alEnd.add(stringEndDate + " " + stringEndTime);
 
 				events.add(new Event(stringEventID, stringEventID, stringType,
 						stringType, stringLocation, stringLocation,

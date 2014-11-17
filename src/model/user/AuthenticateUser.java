@@ -7,7 +7,6 @@ import model.QueryBuild.QueryBuilder;
 public class AuthenticateUser {
 
 	private ResultSet resultSet;
-
 	private QueryBuilder qb;
 
 	// Metoden faar email og password fra switchen (udtrukket fra en json) samt en boolean der skal saettes til true hvis det er serveren der logger paa, og false hvis det er en klient
@@ -33,13 +32,14 @@ public class AuthenticateUser {
 			System.out.println("Brugeren findes");
 			System.out.println(resultSet.getString("password"));
 			System.out.println(password);
+			System.out.println(encryptionAES.encrypt(password));
 
 			// Hvis brugeren er aktiv
 			if(resultSet.getInt("active")==1)
 			{					
 				System.out.println("Brugeren er aktiv");
 				// Hvis passwords matcher
-				if(resultSet.getString("password").equals(password))
+				if(resultSet.getString("password").equals(encryptionAES.encrypt(password)))
 				{
 					int userID = resultSet.getInt("userid");
 

@@ -7,6 +7,7 @@ import model.Forecast.ForecastModel;
 import model.QOTD.QOTDModel;
 import model.calendar.Event;
 import model.note.Note;
+import JsonClasses.AddUser;
 import JsonClasses.AuthUser;
 import JsonClasses.CalendarInfo;
 import JsonClasses.CreateCalendar;
@@ -21,7 +22,7 @@ public class GiantSwitch {
 	
 	
 	
-	public String GiantSwitchMethod(String jsonString) throws SQLException {
+	public String GiantSwitchMethod(String jsonString) throws Exception {
 
 		//Events eventsKlasse = new Events(0, 0, 0, jsonString, jsonString, jsonString, jsonString, jsonString);
 
@@ -64,7 +65,16 @@ public class GiantSwitch {
 		case "logOut":
 			System.out.println("Recieved logOut");
 			break;
-
+		
+		case "addUser":
+			System.out.println("Received addUser");
+			AddUser AddU = (AddUser)gson.fromJson(jsonString, AddUser.class);
+			System.out.println("Email of new user: " + AddU.getEmail());
+			System.out.println("Password of the new user: " + AddU.getPassword());
+			answer = SW.addUser(AddU.getEmail(), AddU.getPassword());
+			System.out.println(answer);
+			break;
+		
 		/*************
 		 ** CALENDAR **
 		 *************/
@@ -126,7 +136,7 @@ public class GiantSwitch {
 		 ** QUOTE **
 		 **********/
 		case "getQuote":
-			System.out.println("case kører");
+			System.out.println("case kï¿½rer");
 		answer = QOTDKlasse.getQuote();
 			System.out.println(answer);
 			
@@ -137,13 +147,13 @@ public class GiantSwitch {
 		 ************/
 
 		case "getWeather":
-			System.out.println("virker altså");
+			System.out.println("virker altsï¿½");
 			 ArrayList<Forecast> forecastList = fm.requestForecast();
 		        
 		        for (int i = 0; i < forecastList.size(); i++) {
 		        	System.out.println(forecastList.get(i).toString());
 		        }
-			answer = "virker altså";
+			answer = "virker altsï¿½";
 			//fm.getForecast();
 			System.out.println("Recieved weather");
 			break;
@@ -195,8 +205,9 @@ public class GiantSwitch {
 			return "deleteEvent"; 
 		} else if (ID.contains("createCalendar")) {
 			return "createCalendar";
+		} else if (ID.contains("addUser")) {
+			return "addUser";
 		}
-
 		else
 			return "error";
 	}
