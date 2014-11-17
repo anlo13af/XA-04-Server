@@ -129,23 +129,44 @@ public class Execute extends Model {
         } else {
             System.out.println(sql);
             
-            sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
+            sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(" ;
             StringBuilder sb = new StringBuilder();
             for (String n : getValues().getValues()) {
                 if (sb.length() > 0) sb.append(',');
                 sb.append(" ?");
+                
             }
             sql += sb.toString();
-            sql += " );";
+            System.out.println(sql);
+            sql += " ) ON DUPLICATE KEY UPDATE " + "(" +getQueryBuilder().getFields() + ") " + "VALUES (";
+            
+            StringBuilder sb2 = new StringBuilder();
+            for (String n : getValues().getValues()) {
+                for (int i = 0; i < 5; i++) sb2.append(',');
+               
+                sb2.append(" ?");
+                sql += sb2.toString();
+                
+            }
+            
+            System.out.println(sql);
             try {
                 getConnection(false);
                 getConn();
                 //String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(sql);
+                System.out.println(sqlStatement);
                 int x = 0;
                 for (int i = 0; i < getValues().getValues().length; i++) {
                     x = i;
                     sqlStatement.setString(x+1, getValues().getValues()[i]);
+                    
+                    
+                  
+                    
+                    
+                  
+                    
                 }
 
             } catch (SQLException e) {
