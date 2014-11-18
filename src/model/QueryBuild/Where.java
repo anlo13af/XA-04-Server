@@ -51,7 +51,7 @@ public class Where {
     public Execute all(){
         return new Execute(getQueryBuilder(), true);
     }
-
+   
 
     /**
      * WHERE key operate value, ex. WHERE id = 5
