@@ -9,7 +9,9 @@ public class QueryBuilder {
     private String tableName;
     private String fields;
     private boolean softDelete;
+    private boolean Delete;
     private boolean isUpdate;
+    private boolean Insert;
 
     protected void setSoftDelete(boolean b){
         this.softDelete = b;
@@ -17,7 +19,18 @@ public class QueryBuilder {
     protected boolean isSoftDelete(){
         return softDelete;
     }
-
+    protected void setDelete(boolean b){
+    	this.Delete = b;
+    }
+    protected boolean isDelete(){
+    	return Delete;
+    }
+    protected void setInsert(boolean b){
+    	this.Insert = b;
+    }
+    protected boolean isInsert(){
+    	return Insert;
+    }
     protected boolean isUpdate() {
         return isUpdate;
     }
@@ -72,6 +85,7 @@ public class QueryBuilder {
      * @param tableName
      * @return
      */
+    
     public Where selectFrom(String tableName) {
 
         QueryBuilder queryBuilder = new QueryBuilder();
@@ -100,6 +114,7 @@ public class QueryBuilder {
             sb.append(n);
         }
         queryBuilder.setFields(sb.toString());
+        queryBuilder.setInsert(true);
         return new Values(queryBuilder);
 
     }
@@ -129,17 +144,19 @@ public class QueryBuilder {
 
        return new Where(queryBuilder);
     }
+ 
 
     /**
      * Soft delete method. UPDATE tableName
      * @param tableName
      * @return
      */
-    public Where deleteFrom(String tableName){
+    public Values deleteFrom(String tableName){
         QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setTableName(tableName);
-        queryBuilder.setSoftDelete(true);
-        return new Where(queryBuilder);
+        queryBuilder.setDelete(true);
+        
+        return new Values(queryBuilder);
     }
 
 

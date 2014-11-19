@@ -1,6 +1,8 @@
 package model.Forecast;
 
+import model.Model;
 import model.QOTD.QOTDModel;
+import model.QueryBuild.Execute;
 import model.QueryBuild.QueryBuilder;
 
 import org.joda.time.DateTime;
@@ -9,6 +11,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import com.mysql.jdbc.Statement;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,23 +26,27 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Iterator;
 
-public class ForecastModel {
+public class ForecastModel extends Model {
 
 	     // Json parser to retrieve and map data from openweathermap.org
 	     private ArrayList<Forecast> forecastList = new ArrayList();
 	     private String weatherDescription = "";
 	     QueryBuilder qb = new QueryBuilder();
+	    
 	     
 	     // 
-	     public ArrayList<Forecast> requestForecast() {
+	     public ArrayList<Forecast> requestForecast() throws SQLException  {
+	    	
 	         URL url;
 	         HttpURLConnection conn;
 	         BufferedReader rd;
 	         String line;
-
+	         String [] value = {"*"};
+	         
 	         String result = "";
 	        // api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
 	         try {
+	        	 qb.deleteFrom("dailyupdate").values(value).Execute();
 	             //url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?lat=55.67886&lon=12.52975&cnt=14&mode=json&units=metric");
 	        	 url = new URL("http://api.openweathermap.org/data/2.5/forecast?lat=55.67886&lon=12.52975&&mode=json&units=metric");
 	             conn = (HttpURLConnection) url.openConnection();
@@ -50,13 +58,16 @@ public class ForecastModel {
 	             	
 	             	//vi skal ligge alle linjerne oven i hinanden
 	                 result += line;
+	                
 	             }
 	             rd.close();
+	          
 	         } catch (IOException e) {
 	             e.printStackTrace();
 	         } 
 
 	         try {
+	        	 
 	             JSONParser jsonParser = new JSONParser();
 	             JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
 
@@ -84,9 +95,7 @@ public class ForecastModel {
 	                 Object ws =  speedy.get("speed");
 	                 String windspeed = String.valueOf(ws);
 	                 
-	                 /*Object  ws = innerObj.get("speed");
-                     String windspeed = String.valueOf(ws);*/
-                    
+
 	               
 	                 JSONObject temp = (JSONObject) innerObj.get("main");
 	                Object celsius =  temp.get("temp");
@@ -117,8 +126,9 @@ public class ForecastModel {
 	                 try {
 	                	String [] keys = {"date","apparentTemperature","summary","windspeed", "qotd"};
 	             		String [] values = {sh, temperature, weatherDescription, windspeed, hey};
+	             	 
 	             		qb.insertInto("dailyupdate", keys).values(values).Execute();
-						//forecast = qb.insertInto("dailyupdate", null).where("msg_type", "=", "forecast").ExecuteQuery();
+
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

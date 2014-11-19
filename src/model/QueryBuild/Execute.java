@@ -1,6 +1,7 @@
 package model.QueryBuild;
 
 import model.Model;
+
 import org.apache.commons.lang.StringEscapeUtils;
 
 import java.sql.ResultSet;
@@ -90,7 +91,20 @@ public class Execute extends Model {
         }
         return sqlStatement.executeQuery();
     }
-
+    
+public boolean ExecuteDel() throws SQLException  {
+	 String sql = "DELETE * FROM cbscalendar.dailyupdate;";
+	 try {
+		sqlStatement = getConn().prepareStatement(sql);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return sqlStatement.execute();
+	 
+	 
+	
+}
 
     /**
      * Execute SQL Query. <strong>OBS nothing returns.</strong>
@@ -100,6 +114,17 @@ public class Execute extends Model {
     public boolean Execute() throws SQLException {
         String sql = "";
         System.out.println("kommer til execute");
+        
+        if(getQueryBuilder().isDelete()){
+        	 
+        	sql = "DELETE FROM cbscalendar.dailyupdate;";
+            getConnection(false);
+            getConn();
+            sqlStatement = getConn().prepareStatement(sql);
+            sqlStatement.execute();
+            System.out.println("******************************");
+        	 
+        }
         if (getQueryBuilder().isSoftDelete()) {
             sql = UPDATE + getQueryBuilder().getTableName() + " SET active = 0" +
                     WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " " + getWhere().getWhereValue() + ";  ";
@@ -126,9 +151,16 @@ public class Execute extends Model {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println(sql);
-            sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
+        } 
+        	
+        
+        else if (getQueryBuilder().isInsert()){
+            
+            
+            //sqlStatement = null;
+           sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
+           
+           
             StringBuilder sb = new StringBuilder();
             for (String n : getValues().getValues()) {
                 if (sb.length() > 0) sb.append(',');
@@ -139,23 +171,27 @@ public class Execute extends Model {
             System.out.println(sql);
         
             
-            System.out.println(sql);
+            System.out.println(sql + "piiiis");
             try {
-                getConnection(false);
+            	getConnection(false);
                 getConn();
-                //String cleanSql = StringEscapeUtils.escapeSql(sql);
-                sqlStatement = getConn().prepareStatement(sql);
+            	sqlStatement = getConn().prepareStatement(sql);
+                
                 System.out.println(sqlStatement);
                 int x = 0;
                 for (int i = 0; i < getValues().getValues().length; i++) {
                     x = i;
                     sqlStatement.setString(x+1, getValues().getValues()[i]);
+                    
+            
                 }
+            }
 
-            } catch (SQLException e) {
+             catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println(sqlStatement);
 
         return sqlStatement.execute();
     }
