@@ -125,7 +125,7 @@ public boolean ExecuteDel() throws SQLException  {
             System.out.println("******************************");
         	 
         }
-        if (getQueryBuilder().isSoftDelete()) {
+        else if (getQueryBuilder().isSoftDelete()) {
             sql = UPDATE + getQueryBuilder().getTableName() + " SET active = 0" +
                     WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " " + getWhere().getWhereValue() + ";  ";
             try {
@@ -154,7 +154,7 @@ public boolean ExecuteDel() throws SQLException  {
         } 
         	
         
-        else if (getQueryBuilder().isInsert()){
+        else {
             
             
             //sqlStatement = null;

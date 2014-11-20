@@ -71,6 +71,7 @@ public class TCPClient2 {
 			AU.setAuthUserPassword(pass);
 			AU.setAuthUserIsAdmin(true);
 			gsonString = gson.toJson(AU);
+			System.out.println(gsonString);
 			gogogo(gsonString);
 			break;
 
