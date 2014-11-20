@@ -1,7 +1,7 @@
 package main;
 import java.io.*;
 import java.net.*;
-import JsonClasses.CalendarInfo;
+import JsonClasses.GetCalendar;
 
 import com.google.gson.stream.JsonReader;
 

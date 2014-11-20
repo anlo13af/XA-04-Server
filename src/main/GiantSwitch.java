@@ -6,12 +6,14 @@ import model.Forecast.Forecast;
 import model.Forecast.ForecastModel;
 import model.QOTD.QOTDModel;
 import model.calendar.Event;
+import model.calendar.Events;
+import model.calendar.GetCalendarData;
 import model.note.Note;
 import JsonClasses.AddUser;
 import JsonClasses.AuthUser;
-import JsonClasses.CalendarInfo;
 import JsonClasses.CreateCalendar;
 import JsonClasses.DeleteCalendar;
+import JsonClasses.GetCalendar;
 
 import com.google.gson.*;
 
@@ -93,16 +95,14 @@ public class GiantSwitch {
 			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
 			System.out.println(DC.getCalendarName());
 			answer = SW.deleteCalendar(DC.getUserName(), DC.getCalendarName());
-			
 			break;
 		
 		case "saveImportedCalendar":
-			
-			
 			break;
 			
 		case "getCalendar":
-			System.out.println("Recieved getCalendar");
+			GetCalendar GC = (GetCalendar)gson.fromJson(jsonString, GetCalendar.class);
+			answer = GetCalendarData.getDataFromCalendar(GC.getcbsID());
 			break;
 
 		case "getEvents":

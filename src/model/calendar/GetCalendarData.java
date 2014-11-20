@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class GetCalendarData {
 	
-	EncryptUserID e = new EncryptUserID();
+	static EncryptUserID e = new EncryptUserID();
 
 	//henter data fra URL og l??er ind til en string
     private static String readUrl(String urlString) throws Exception {
@@ -45,21 +45,21 @@ public class GetCalendarData {
      * Allows client to retrieve CBS's calendar and then access it.
      * @throws Exception
      */
-    public Events getDataFromCalendar() throws Exception {
+    public static String getDataFromCalendar(String userID) throws Exception {
 
         /**
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
          * Encrypt hash from
          */
-    	String userID = "alla13ad";
-        String json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+e.getKey()+".json");
+    	//String userID = "alla13ad";
+        String json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+e.getKey(userID)+".json");
         //String json = readUrl("http://calendar.cbs.dk/events.php/anli12ae/4ea5ca7d5f4a7475700a6508c5728cea.json");
      
-        JsonParser parser = new JsonParser();
-        JsonObject obj = parser.parse(json).getAsJsonObject();
-        Gson gson = new Gson();
-        Events events = gson.fromJson(obj, Events.class);
-        return events;
+        //JsonParser parser = new JsonParser();
+        //JsonObject obj = parser.parse(json).getAsJsonObject();
+        //Gson gson = new Gson();
+        //Events events = gson.fromJson(obj, Events.class);
+        return json;
         
         //tester events activityID's
         //for (int i = 0; i < events.getEvents().size(); i++){

@@ -24,7 +24,7 @@ public class Events {
 		QueryBuilder qb = new QueryBuilder();
 		try {
 			ResultSet rs = qb.selectFrom("events").all().ExecuteQuery();
-			while (rs.next()) {
+			/*while (rs.next()) {
 				// String values from SQL database (must be created)
 				int eventID = rs.getInt("eventid");
 				int type = rs.getInt("type");
@@ -58,7 +58,7 @@ public class Events {
 				events.add(new Event(stringEventID, stringEventID, stringType,
 						stringType, stringLocation, stringLocation,
 						stringCreatedby, alStart, alEnd));
-			}
+			}*/
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,18 +77,18 @@ public class Events {
 		return Arrays.toString(events.toArray());
 	}
 
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		GetCalendarData CalendarData = new GetCalendarData();
-		Events calendarEvents = CalendarData.getDataFromCalendar();
+		String data = CalendarData.getDataFromCalendar();
+		//Events calendarEvents = CalendarData.getDataFromCalendar();
+		//ArrayList<Event> calendarData = calendarEvents.getEvents();
 		
-		ArrayList<Event> calendarData = calendarEvents.getEvents();
-		
-		for (Event event : calendarData) {
+		/*for (Event event : calendarData) {
 			System.out.println(event.getDescription());
 			System.out.println(event.getType());
 			System.out.println(event.getStart());
 			System.out.println(event.getEnd());
-		}
-
-	}
+			}*/
+		//System.out.println(data);
+	//}
 }

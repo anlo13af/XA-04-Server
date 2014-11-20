@@ -10,7 +10,11 @@ import com.google.gson.GsonBuilder;
 
 import JsonClasses.*;
 import model.QOTD.*;
+import model.calendar.Event;
+import model.calendar.Events;
+import model.calendar.GetCalendarData;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TCPClient2 {
@@ -23,7 +27,7 @@ public class TCPClient2 {
 	}
 	public static void switchy() throws Exception {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather \n6:AddUser");
+		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather \n6:AddUser \n7:CBS Calendar");
 		int lol = scan.nextInt();
 		//System.out.println("password?");
 		//String password = scan.nextLine();
@@ -100,6 +104,14 @@ public class TCPClient2 {
 			gsonString = gson.toJson(AddU);
 			gogogo(gsonString);
 			break;
+		
+		case 7:
+			System.out.println("Indtast CBS ID: ");
+			String cbsID = scan.nextLine();
+			String a = "{\"serialVersionUID\":1,\"overallID\":\"" + "getCalendar"
+					+ "\",\"cbsID\":\"" + cbsID + "\"}";
+			gogogo(a);
+
 		}
 	}
 
