@@ -58,7 +58,7 @@ public class SwitchMethods extends Model
 	{
 		String [] keys = {"Name","Active","CreatedBy","PrivatePublic"};
 		String [] values = {newCalendarName,"1",userName, Integer.toString(publicOrPrivate)};
-		qb.insertInto("calendar", keys).values(values).Execute();
+		qb.insertInto("calendar", keys).values(values).execute();
 		
 //		doUpdate("insert into test.calendar (Name, Active, CreatedBy, PrivatePublic) VALUES ('"+newCalendarName+"', '1', '"+userName+"', '"+publicOrPrivate+"');");
 	}
@@ -67,10 +67,9 @@ public class SwitchMethods extends Model
 		String [] keys = {"email", "active", "password"};
 		String [] values = {newUserEmail, "1", encryptionAES.encrypt(newUserPassword)};
 		try {
-			qb.insertInto("users", keys).values(values).Execute();
+			qb.insertInto("users", keys).values(values).execute();
 			return "0"; //Returnerer 0: brugeren er oprettet
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "1"; //Returnerer 1: Brugeren blev ikke oprettet
 		}
@@ -118,7 +117,7 @@ public class SwitchMethods extends Model
 			{
 				String [] keys = {"Active"};
 				String [] values = {"2"};
-				qb.update("Calendar", keys, values).where("Name", "=", calendarName).Execute();
+				qb.update("Calendar", keys, values).where("Name", "=", calendarName).execute();
 				stringToBeReturned = "Calendar has been set inactive";
 			}
 		}

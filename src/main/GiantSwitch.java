@@ -1,14 +1,10 @@
 package main;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Forecast.Forecast;
 import model.Forecast.ForecastModel;
 import model.QOTD.QOTDModel;
-import model.calendar.Event;
-import model.calendar.Events;
 import model.calendar.GetCalendarData;
-import model.note.Note;
 import JsonClasses.AddUser;
 import JsonClasses.AuthUser;
 import JsonClasses.CreateCalendar;
@@ -25,11 +21,6 @@ public class GiantSwitch {
 	
 	
 	public String GiantSwitchMethod(String jsonString) throws Exception {
-
-		//Events eventsKlasse = new Events(0, 0, 0, jsonString, jsonString, jsonString, jsonString, jsonString);
-
-		Note noteKlasse = new Note();
-		//ForecastModel forecastKlasse = new ForecastModel();
 		QOTDModel QOTDKlasse = new QOTDModel();
 		ForecastModel fm = new ForecastModel();
 		SwitchMethods SW = new SwitchMethods();
@@ -37,6 +28,7 @@ public class GiantSwitch {
 		
 		Gson gson = new GsonBuilder().create();
 		String answer = "";	
+		
 		//Creates a switch which determines which method should be used. Methods will be applied later on
 		switch (Determine(jsonString)) {
 		//If the Json String contains one of the keywords below, run the relevant method.

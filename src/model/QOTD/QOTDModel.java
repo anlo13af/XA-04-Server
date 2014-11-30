@@ -6,15 +6,8 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-
-
-
-
-
 import java.util.Date;
 
-import model.Forecast.Forecast;
 import model.QueryBuild.QueryBuilder;
 
 import org.json.simple.JSONObject;
@@ -22,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 public class QOTDModel {
 
+	@SuppressWarnings("unused")
 	private ArrayList<QOTD> qotdlist = new ArrayList<>();
 	
 	QOTD qotdlist2 = new QOTD(null, null, null);
@@ -51,7 +45,8 @@ public class QOTDModel {
  
     }
     
-     	public static String saveQuote() {
+     	@SuppressWarnings("unused")
+		public static String saveQuote() {
      		
 
             /**
@@ -86,7 +81,6 @@ public class QOTDModel {
     			
     	
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return newquote;
@@ -101,7 +95,8 @@ public class QOTDModel {
   	public String getQuote(){
   		//System.out.println("test");
   		String q = "";
-  		String[] key = {"qotd"};
+  		@SuppressWarnings("unused")
+		String[] key = {"qotd"};
   		saveQuote(); 
   		try {
   			resultSet = qb.selectFrom("dailyupdate").all().ExecuteQuery();
@@ -116,7 +111,6 @@ public class QOTDModel {
 			}
 				}
   		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return q;

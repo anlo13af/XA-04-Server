@@ -13,8 +13,7 @@ public class encryptionAES {
 		{ 'D', 'I', 'S', 'T', '@', 'D', 'O', 'E', 'K', '4', 'E', 'V', 'A', 'H', '!', '!' };
 
 		        // Performs Encryption
-		        @SuppressWarnings("restriction")
-				public static String encrypt(String plainText) throws Exception 
+		        public static String encrypt(String plainText) throws Exception 
 		        {
 		                Key key = generateKey();
 		                Cipher chiper = Cipher.getInstance(algorithm);
@@ -25,7 +24,6 @@ public class encryptionAES {
 		        }
 
 		        // Performs decryption
-		        @SuppressWarnings("restriction")
 				public static String decrypt(String encryptedText) throws Exception 
 		        {
 		                // generate key 

@@ -28,14 +28,16 @@ import java.util.Iterator;
 
 public class ForecastModel extends Model {
 
-	     // Json parser to retrieve and map data from openweathermap.org
-	     private ArrayList<Forecast> forecastList = new ArrayList();
-	     private String weatherDescription = "";
-	     QueryBuilder qb = new QueryBuilder();
+	    // Json parser to retrieve and map data from openweathermap.org
+	    @SuppressWarnings({ "unchecked", "rawtypes" })
+	    private ArrayList<Forecast> forecastList = new ArrayList();
+	    private String weatherDescription = "";
+	    QueryBuilder qb = new QueryBuilder();
 	    
 	     
 	     // 
-	     public ArrayList<Forecast> requestForecast() throws SQLException  {
+	     @SuppressWarnings("rawtypes")
+		public ArrayList<Forecast> requestForecast() throws SQLException  {
 	    	
 	         URL url;
 	         HttpURLConnection conn;
@@ -46,8 +48,7 @@ public class ForecastModel extends Model {
 	         String result = "";
 	        // api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
 	         try {
-	        	 qb.deleteFrom("dailyupdate").values(value).Execute();
-	             //url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?lat=55.67886&lon=12.52975&cnt=14&mode=json&units=metric");
+	        	 qb.deleteFrom("dailyupdate").values(value).execute();
 	        	 url = new URL("http://api.openweathermap.org/data/2.5/forecast?lat=55.67886&lon=12.52975&&mode=json&units=metric");
 	             conn = (HttpURLConnection) url.openConnection();
 	             conn.setRequestMethod("GET");
@@ -122,15 +123,15 @@ public class ForecastModel extends Model {
 
 	                 }
 	                 
-	                 ResultSet forecast = null;
+	                @SuppressWarnings("unused")
+					ResultSet forecast = null;
 	                 try {
 	                	String [] keys = {"date","apparentTemperature","summary","windspeed", "qotd"};
 	             		String [] values = {sh, temperature, weatherDescription, windspeed, hey};
 	             	 
-	             		qb.insertInto("dailyupdate", keys).values(values).Execute();
+	             		qb.insertInto("dailyupdate", keys).values(values).execute();
 
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 	                 forecastList.add(new Forecast(sh, "10", weatherDescription));
@@ -153,7 +154,8 @@ public class ForecastModel extends Model {
 	     	QueryBuilder qb = new QueryBuilder();
 	     	Date date = new Date(); // Current date & time
 	     	long maxTimeNoUpdate = 3600; // Maximum one hour with no update
-	     	ArrayList<Forecast> forecastFromDB = new ArrayList();
+	     	@SuppressWarnings({ "rawtypes", "unchecked" })
+			ArrayList<Forecast> forecastFromDB = new ArrayList();
 	     	
 	     	long date1 = date.getTime();
 	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
@@ -173,18 +175,15 @@ public class ForecastModel extends Model {
 					// Method to add these ResultSet values to ArrayList needs to be created
 					return (ArrayList<Forecast>) forecastFromDB;
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	     		
 	     		//Do something nice with ResultSet in order to make it into an ArrayList
 	     		try {
 					while(forecast.next()){
-						//forecastFromDB.add("xx");
 						return forecastFromDB;
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	     		return null;

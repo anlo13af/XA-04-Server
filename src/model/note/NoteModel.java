@@ -1,10 +1,8 @@
 package model.note;
 
-import java.sql.SQLException;
-
 /*
  * 		Mangler:
- * 			- Identifikation på brugeren der har lavet noten
+ * 			- Identifikation pï¿½ brugeren der har lavet noten
  * 			- Hvem der skal kunne redigere noten
  * 			- Mulighed for at slette / redigere noter
  * 			- Active Status

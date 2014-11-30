@@ -1,16 +1,8 @@
 package model.calendar;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * Created by jesperbruun on 13/10/14.

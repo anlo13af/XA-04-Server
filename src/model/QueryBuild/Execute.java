@@ -2,8 +2,6 @@ package model.QueryBuild;
 
 import model.Model;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -97,7 +95,6 @@ public boolean ExecuteDel() throws SQLException  {
 	 try {
 		sqlStatement = getConn().prepareStatement(sql);
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	return sqlStatement.execute();
@@ -111,7 +108,7 @@ public boolean ExecuteDel() throws SQLException  {
      * @return
      * @throws SQLException
      */
-    public boolean Execute() throws SQLException {
+    public boolean execute() throws SQLException {
         String sql = "";
         System.out.println("kommer til execute");
         
@@ -162,7 +159,7 @@ public boolean ExecuteDel() throws SQLException  {
            
            
             StringBuilder sb = new StringBuilder();
-            for (String n : getValues().getValues()) {
+            for (@SuppressWarnings("unused") String n : getValues().getValues()) {
                 if (sb.length() > 0) sb.append(',');
                 sb.append(" ?");
             }

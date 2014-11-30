@@ -2,15 +2,8 @@ package model.calendar;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.joda.time.format.DateTimeFormatter;
-
 import model.QueryBuild.QueryBuilder;
 
 /**
@@ -23,6 +16,7 @@ public class Events {
 	public ArrayList<Event> getEvents() {
 		QueryBuilder qb = new QueryBuilder();
 		try {
+			@SuppressWarnings("unused")
 			ResultSet rs = qb.selectFrom("events").all().ExecuteQuery();
 			/*while (rs.next()) {
 				// String values from SQL database (must be created)

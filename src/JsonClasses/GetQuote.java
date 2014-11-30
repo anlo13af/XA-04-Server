@@ -2,7 +2,7 @@ package JsonClasses;
 
 public class GetQuote implements java.io.Serializable
 {
-	private  final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private String overallID = "getQuote";
 	//private String calendarName;
 	//private String userName;
