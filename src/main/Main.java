@@ -16,7 +16,7 @@ public class Main {
 		
 		System.out.println(cf.getPassword());
 		
-		new GUILogic().run();
+		//new GUILogic().run();
 		new TCPServer().run();
 	}
 

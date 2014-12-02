@@ -74,6 +74,18 @@ public class SwitchMethods extends Model
 			return "1"; //Returnerer 1: Brugeren blev ikke oprettet
 		}
 	}
+	public String changePassword (String UserEmail, String newPassword) throws Exception
+	{
+		String [] keys = {"password"};
+		String [] values = {encryptionAES.encrypt(newPassword)};
+		try {
+			qb.update("users", keys, values).where("email", "=", UserEmail).execute();
+			return "0"; //Returnerer 0: password er skiftet.
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "1"; //Returnerer 1: password blev ikke skiftet.
+		}
+	}
 	/**
 	 * Allows the client to delete a calendar
 	 * @param userName

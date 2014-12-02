@@ -7,6 +7,7 @@ import model.QOTD.QOTDModel;
 import model.calendar.GetCalendarData;
 import JsonClasses.AddUser;
 import JsonClasses.AuthUser;
+import JsonClasses.ChangePW;
 import JsonClasses.CreateCalendar;
 import JsonClasses.DeleteCalendar;
 import JsonClasses.GetCalendar;
@@ -58,6 +59,15 @@ public class GiantSwitch {
 
 		case "logOut":
 			System.out.println("Recieved logOut");
+			break;
+		
+		case "changePassword":
+			System.out.println("Received changePassword");
+			ChangePW Change = (ChangePW)gson.fromJson(jsonString, ChangePW.class);
+			System.out.println("User email: " + Change.getEmail());
+			System.out.println("New pw: " + Change.getPassword());
+			answer = SW.changePassword(Change.getEmail(), Change.getPassword());
+			System.out.println(answer);
 			break;
 		
 		case "addUser":
@@ -199,6 +209,8 @@ public class GiantSwitch {
 			return "createCalendar";
 		} else if (ID.contains("addUser")) {
 			return "addUser";
+		} else if (ID.contains("changePassword")) {
+			return "changePassword";
 		}
 		else
 			return "error";

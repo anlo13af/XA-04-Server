@@ -1,30 +1,29 @@
 package JsonClasses;
 
-public class AuthUser implements java.io.Serializable
-{
+public class ChangePW implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	private String overallID = "logIn";
+	private String overallID = "changePassword";
 	private String email;
 	private String password;
 	
-	//Getters and setters for everything, bitch
 	public String getOverallID() {
 		return overallID;
 	}
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public String getAuthUserEmail() {
+	
+	public String getEmail() {
 		return email;
 	}
-	public void setAuthUserEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAuthUserPassword() {
+	
+	public String getPassword() {
 		return password;
 	}
-	public void setAuthUserPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
-
 }
