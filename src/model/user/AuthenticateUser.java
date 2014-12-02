@@ -29,11 +29,6 @@ public class AuthenticateUser {
 
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
-			System.out.println("Brugeren findes");
-			System.out.println(resultSet.getString("password"));
-			System.out.println(password);
-			System.out.println(encryptionAES.encrypt(password));
-
 			// Hvis brugeren er aktiv
 			if(resultSet.getInt("active")==1)
 			{					
@@ -41,23 +36,7 @@ public class AuthenticateUser {
 				// Hvis passwords matcher
 				if(resultSet.getString("password").equals(encryptionAES.encrypt(password)))
 				{
-					return "0";
-					
-					/*int userID = resultSet.getInt("userid");
-
-					String[] key = {"type"};
-
-					resultSet = qb.selectFrom(key, "roles").where("userid", "=", new Integer(userID).toString()).ExecuteQuery();
-					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
-					if(resultSet.next())
-					{ 
-						if(resultSet.getString("type").equals("admin") && isAdmin || (resultSet.getString("type").equals("user") && !isAdmin))
-						{
-							return "0"; // returnerer "0" hvis bruger/admin er godkendt
-						}
-					} else {
-						return "4"; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
-					}*/
+					return "0"; //returnerer "0" hvis brugeren er godkendt
 				} else {
 					return "3"; // returnerer fejlkoden "3" hvis password ikke matcher
 				}

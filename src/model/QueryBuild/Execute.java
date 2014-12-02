@@ -67,6 +67,7 @@ public class Execute extends Model {
                 getConn();
                 //String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(sql);
+                System.out.println(sqlStatement);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -167,8 +168,6 @@ public boolean ExecuteDel() throws SQLException  {
             sql += " );";
             System.out.println(sql);
         
-            
-            System.out.println(sql + "piiiis");
             try {
             	getConnection(false);
                 getConn();
