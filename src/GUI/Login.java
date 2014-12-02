@@ -97,7 +97,6 @@ public class Login extends JPanel {
 		btnForgotLogIn.setBounds(485, 502, 403, 41);
 		
 		add(btnForgotLogIn);
-		lblCBSlogo.setIcon(new ImageIcon(Login.class.getResource("/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		
 		add(lblCBSlogo);
@@ -110,7 +109,6 @@ public class Login extends JPanel {
 		
 		add(textFieldPassword);
 		lblBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBackground.setIcon(new ImageIcon(Login.class.getResource("/Images/MetalBackground.jpg")));
 		lblBackground.setSize(new Dimension(1366, 768));
 		lblBackground.setBounds(0, 0, 1366, 768);
 		

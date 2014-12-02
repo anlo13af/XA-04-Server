@@ -37,7 +37,7 @@ public class UserInfo extends JPanel {
 		setLayout(null);
 		
 		lblCBSlogo = new JLabel("");
-		lblCBSlogo.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/CBSLogo3.png")));
+		lblCBSlogo.setIcon(new ImageIcon(UserInfo.class.getResource("/GUI/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		add(lblCBSlogo);
 		
@@ -127,11 +127,11 @@ public class UserInfo extends JPanel {
 
 		boolean active = true;
 		lblOnlineDot = new JLabel("");
-		lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Green.png")));
+		lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/GUI/Images/Green.png")));
 		if (active) {
-			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Red.png")));
+			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/GUI/Images/Red.png")));
 		} else {
-			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Green.png")));
+			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/GUI/Images/Green.png")));
 		}
 //<<<<<<< HEAD
 		lblOnlineDot.setBounds(755, 433, 20, 20);
@@ -156,7 +156,7 @@ public class UserInfo extends JPanel {
 						
 						JLabel lblBackground = new JLabel("");
 						lblBackground.setSize(new Dimension(1366, 768));
-						lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/MetalBackground.jpg")));
+						lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/GUI/Images/MetalBackground.jpg")));
 						lblBackground.setBounds(0, 0, 1366, 768);
 						add(lblBackground);
 		if (active) {

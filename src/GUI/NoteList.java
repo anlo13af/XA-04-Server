@@ -43,11 +43,11 @@ public class NoteList extends JPanel {
 
 		Object[][] data = {
 
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3"},
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3"},
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3"},
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3" },
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3" } 
+				{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!","3"},
+				{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!","3"},
+				{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!","3"},
+				{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!","3" },
+				{ "Dï¿½K Julefrokost", "11.11.2022", "Game on!","3" } 
 				};
 
 		final JTable table = new JTable(data, columnNames);
@@ -108,10 +108,10 @@ public class NoteList extends JPanel {
 		add(btnLogout);
 		
 		label = new JLabel("");
-		label.setIcon(new ImageIcon(NoteList.class.getResource("/Images/CBSLogo3.png")));
+		label.setIcon(new ImageIcon(NoteList.class.getResource("/GUI/Images/CBSLogo3.png")));
 		label.setBounds(10, 698, 250, 59);
 		add(label);
-		lblBackground.setIcon(new ImageIcon(NoteList.class.getResource("/Images/MetalBackground.jpg")));
+		lblBackground.setIcon(new ImageIcon(NoteList.class.getResource("/GUI/Images/MetalBackground.jpg")));
 		lblBackground.setBounds(0, 0, 1366, 768);
 		
 		add(lblBackground);

@@ -48,7 +48,7 @@ public class GiantSwitch {
 			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
 			System.out.println("Recieved logIn");
 			try {
-				answer = Auth.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
+				answer = Auth.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword());
 				System.out.println(answer);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -129,7 +129,7 @@ public class GiantSwitch {
 		 **********/
 		case "getQuote":
 			System.out.println("case k�rer");
-		answer = QOTDKlasse.getQuote();
+			answer = QOTDKlasse.getQuote();
 			System.out.println(answer);
 			
 			break;

@@ -137,11 +137,10 @@ public class SwitchMethods extends Model
 	 * Allows the client to log in
 	 * @param email
 	 * @param password
-	 * @param isAdmin
 	 * @return
 	 * @throws Exception
 	 */
-	public String authenticate(String email, String password, boolean isAdmin) throws Exception {
+	public String authenticate(String email, String password) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
@@ -160,19 +159,8 @@ public class SwitchMethods extends Model
 				if(resultSet.getString("password").equals(password))
 				{
 					System.out.println("Brugerens password matcher");
-					int userID = resultSet.getInt("userid");
-
-					String[] key = {"type"};
-
-					resultSet = qb.selectFrom(key, "roles").where("userid", "=", new Integer(userID).toString()).ExecuteQuery();
-
-					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
-					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
-					{
-						return "0"; // returnerer "0" hvis bruger/admin er godkendt
-					} else {
-						return "4"; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
-					}
+					return "0";
+					
 				} else {
 					return "3"; // returnerer fejlkoden "3" hvis password ikke matcher
 				}

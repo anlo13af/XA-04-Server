@@ -18,7 +18,7 @@ public class AuthenticateUser {
 	 * @return
 	 * @throws Exception
 	 */
-	public String authenticate(String email, String password, boolean isAdmin) throws Exception {
+	public String authenticate(String email, String password) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
@@ -41,7 +41,9 @@ public class AuthenticateUser {
 				// Hvis passwords matcher
 				if(resultSet.getString("password").equals(encryptionAES.encrypt(password)))
 				{
-					int userID = resultSet.getInt("userid");
+					return "0";
+					
+					/*int userID = resultSet.getInt("userid");
 
 					String[] key = {"type"};
 
@@ -55,15 +57,13 @@ public class AuthenticateUser {
 						}
 					} else {
 						return "4"; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
-					}
+					}*/
 				} else {
 					return "3"; // returnerer fejlkoden "3" hvis password ikke matcher
 				}
 			} else {
 				return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
 			}
-		} else {
-			return "1"; // returnerer fejlkoden "1" hvis email ikke findes
-		} return "sut";
-	}
+		} return "1"; // returnerer fejlkoden "1" hvis email ikke findes
+	} 
 }

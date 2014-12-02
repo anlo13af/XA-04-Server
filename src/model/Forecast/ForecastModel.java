@@ -49,7 +49,7 @@ public class ForecastModel extends Model {
 	        // api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
 	         try {
 	        	 qb.deleteFrom("dailyupdate").values(value).execute();
-	        	 url = new URL("http://api.openweathermap.org/data/2.5/forecast?lat=55.67886&lon=12.52975&&mode=json&units=metric");
+	        	 url = new URL("http://api.openweathermap.org/data/2.5/forecast?id=2618425&&mode=json&units=metric");
 	             conn = (HttpURLConnection) url.openConnection();
 	             conn.setRequestMethod("GET");
 	             
@@ -134,7 +134,7 @@ public class ForecastModel extends Model {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-	                 forecastList.add(new Forecast(sh, "10", weatherDescription));
+	                 forecastList.add(new Forecast(sh, temperature, weatherDescription));
 	                 
 	             }
 	         } catch (ParseException ex) {
