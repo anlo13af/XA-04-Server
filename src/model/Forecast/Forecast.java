@@ -44,7 +44,7 @@ public class Forecast {
     
     // Returnere vejrudsigten som en json tekststreng
     public String toString() {
-        return "Forecast{" +
+        return "{" +
                 "date='" + date + '\'' +
                 ", celsius='" + celsius + '\'' +
                 ", desc='" + desc + '\'' +

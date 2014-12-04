@@ -11,6 +11,7 @@ import JsonClasses.ChangePW;
 import JsonClasses.CreateCalendar;
 import JsonClasses.DeleteCalendar;
 import JsonClasses.GetCalendar;
+import JsonClasses.WeatherInfo;
 
 import com.google.gson.*;
 
@@ -149,15 +150,16 @@ public class GiantSwitch {
 		 ************/
 
 		case "getWeather":
+			Gson tojson = new GsonBuilder().create();
 			System.out.println("virker alts�");
 			 ArrayList<Forecast> forecastList = fm.requestForecast();
 		        
 		        for (int i = 0; i < forecastList.size(); i++) {
 		        	System.out.println(forecastList.get(i).toString());
 		        }
-			answer = "virker alts�";
+			answer = tojson.toJson(forecastList);
 			//fm.getForecast();
-			System.out.println("Recieved weather");
+			System.out.println(answer);
 			break;
 		
 		default:
