@@ -79,9 +79,9 @@ public class ForecastModel extends Model {
 
 	             // take each value from the json array separately
 	             while (i.hasNext()) {
-	            	 String hey = "";
+	            	 String qotd = "";
 	            	 
-	            	 hey = QOTDModel.saveQuote();
+	            	 qotd = QOTDModel.saveQuote();
 
 	                 JSONObject innerObj = (JSONObject) i.next();
 
@@ -127,14 +127,14 @@ public class ForecastModel extends Model {
 					ResultSet forecast = null;
 	                 try {
 	                	String [] keys = {"date","apparentTemperature","summary","windspeed", "qotd"};
-	             		String [] values = {sh, temperature, weatherDescription, windspeed, hey};
+	             		String [] values = {sh, temperature, weatherDescription, windspeed, qotd};
 	             	 
 	             		qb.insertInto("dailyupdate", keys).values(values).execute();
 
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-	                 forecastList.add(new Forecast(sh, temperature, weatherDescription));
+	                 forecastList.add(new Forecast(sh, temperature, weatherDescription, qotd));
 	                 
 	             }
 	         } catch (ParseException ex) {

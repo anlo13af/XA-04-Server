@@ -157,9 +157,9 @@ public class GiantSwitch {
 		        for (int i = 0; i < forecastList.size(); i++) {
 		        	System.out.println(forecastList.get(i).toString());
 		        }
-			answer = tojson.toJson(forecastList);
+			answer = "{\"weatherlist\":" + tojson.toJson(forecastList) + "}";
 			//fm.getForecast();
-			System.out.println(answer);
+			System.out.println("{\"weatherlist\":" + answer + "}");
 			break;
 		
 		default:

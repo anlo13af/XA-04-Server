@@ -9,12 +9,14 @@ public class Forecast {
     private String date;
     private String celsius;
     private String desc;
+    private String quote;
 
     // Funktion som setter dato, grader og beskrivelse til Forecast objektet
-    public Forecast(String date, String celsius, String desc) {
+    public Forecast(String date, String celsius, String desc, String quote) {
         this.date = date;
         this.celsius = celsius;
         this.desc = desc;
+        this.quote = quote;
     }
     
     // Settere og gettere for Forecast klassen
@@ -41,6 +43,12 @@ public class Forecast {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+    public String getQuote() {
+    	return quote;
+    }
+    public void setQuote(String quote) {
+    	this.quote = quote;
+    }
     
     // Returnere vejrudsigten som en json tekststreng
     public String toString() {
@@ -48,6 +56,6 @@ public class Forecast {
                 "date='" + date + '\'' +
                 ", celsius='" + celsius + '\'' +
                 ", desc='" + desc + '\'' +
-                '}';
+                ", qotd='" + quote + '\'' + '}';
     }
 }
