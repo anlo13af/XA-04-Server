@@ -3,6 +3,7 @@ package model.calendar;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,10 +58,22 @@ public class GetCalendarData {
         JsonObject obj = parser.parse(json).getAsJsonObject();
         Gson gson = new Gson();
         Events events = gson.fromJson(obj, Events.class);
+        
+        for (int i = 0; i < events.getCBSEvents().size(); i++) {
+        	String[] fix = {events.getCBSEvents().get(i).getStart().get(1)};
+        	String sfix = String.valueOf(fix[0]);
+        	System.out.println(sfix);
+        	int month = Integer.valueOf(sfix);
+        	String finalfix = String.valueOf(month + 1);
+        	ArrayList<String> sjovt = events.getCBSEvents().get(i).getStart();
+        	sjovt.set(1, finalfix);
+        	events.getCBSEvents().get(i).setStart(sjovt);
+        }
         events.getEvents(id);
         
         Gson toJson = new GsonBuilder().create();
         json = toJson.toJson(events);
+        System.out.println(json);
         return json;
         
         //tester events activityID's

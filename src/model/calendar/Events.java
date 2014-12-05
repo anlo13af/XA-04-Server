@@ -79,6 +79,9 @@ public class Events {
 
 		return events;
 	}
+	public ArrayList<Event> getCBSEvents() {
+		return events;
+	}
 
 	public void setEvents(ArrayList<Event> event) {
 		this.events = event;
