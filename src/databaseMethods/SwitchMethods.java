@@ -70,7 +70,6 @@ public class SwitchMethods extends Model {
 				.ExecuteQuery();
 		
 		if (rs.next()) {
-				System.out.println("hmm?");
 				return "2"; // Returnerer 2: brugernavn findes allerede.
 			} else {
 				try {

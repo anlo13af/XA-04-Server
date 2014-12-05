@@ -48,12 +48,9 @@ public class GiantSwitch {
 		 **********/
 		case "logIn":
 			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
-			System.out.println("Recieved logIn");
 			try {
 				answer = Auth.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword());
-				System.out.println(answer);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -63,21 +60,13 @@ public class GiantSwitch {
 			break;
 		
 		case "changePassword":
-			System.out.println("Received changePassword");
 			ChangePW Change = (ChangePW)gson.fromJson(jsonString, ChangePW.class);
-			System.out.println("User email: " + Change.getEmail());
-			System.out.println("New pw: " + Change.getPassword());
 			answer = SW.changePassword(Change.getEmail(), Change.getPassword());
-			System.out.println(answer);
 			break;
 		
 		case "addUser":
-			System.out.println("Received addUser");
 			AddUser AddU = (AddUser)gson.fromJson(jsonString, AddUser.class);
-			System.out.println("Email of new user: " + AddU.getEmail());
-			System.out.println("Password of the new user: " + AddU.getPassword());
 			answer = SW.addUser(AddU.getEmail(), AddU.getPassword());
-			System.out.println(answer);
 			break;
 		
 		/*************
@@ -86,17 +75,11 @@ public class GiantSwitch {
 		case "createCalendar":
 			
 			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
-			System.out.println("Name of the new calendar: " + CC.getCalendarName());
-			System.out.println("User name: " + CC.getUserName());
-			System.out.println("Public or Private: " + CC.getPublicOrPrivate());
 			answer = SW.createNewCalendar(CC.getUserName(), CC.getCalendarName(), CC.getPublicOrPrivate());
-			
-			System.out.println(answer);
 			break;
 			
 		case "deleteCalendar":
 			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
-			System.out.println(DC.getCalendarName());
 			answer = SW.deleteCalendar(DC.getUserName(), DC.getCalendarName());
 			break;
 		
@@ -139,10 +122,7 @@ public class GiantSwitch {
 		 ** QUOTE **
 		 **********/
 		case "getQuote":
-			System.out.println("case k�rer");
 			answer = QOTDKlasse.getQuote();
-			System.out.println(answer);
-			
 			break;
 
 		/************
@@ -151,15 +131,9 @@ public class GiantSwitch {
 
 		case "getWeather":
 			Gson tojson = new GsonBuilder().create();
-			System.out.println("virker alts�");
 			 ArrayList<Forecast> forecastList = fm.requestForecast();
 		        
-		        for (int i = 0; i < forecastList.size(); i++) {
-		        	System.out.println(forecastList.get(i).toString());
-		        }
 			answer = "{\"weatherlist\":" + tojson.toJson(forecastList) + "}";
-			//fm.getForecast();
-			System.out.println("{\"weatherlist\":" + answer + "}");
 			break;
 		
 		default:

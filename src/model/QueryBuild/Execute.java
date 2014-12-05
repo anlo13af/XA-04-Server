@@ -65,9 +65,7 @@ public class Execute extends Model {
             try {
                 getConnection(false);
                 getConn();
-                //String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(sql);
-                System.out.println(sqlStatement);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -82,7 +80,6 @@ public class Execute extends Model {
                 //String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(sql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
-                System.out.println(sqlStatement);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -111,7 +108,6 @@ public boolean ExecuteDel() throws SQLException  {
      */
     public boolean execute() throws SQLException {
         String sql = "";
-        System.out.println("kommer til execute");
         
         if(getQueryBuilder().isDelete()){
         	 
@@ -120,7 +116,6 @@ public boolean ExecuteDel() throws SQLException  {
             getConn();
             sqlStatement = getConn().prepareStatement(sql);
             sqlStatement.execute();
-            System.out.println("******************************");
         	 
         }
         else if (getQueryBuilder().isSoftDelete()) {
@@ -144,7 +139,6 @@ public boolean ExecuteDel() throws SQLException  {
                 //String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(sql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
-                System.out.println(sql);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -166,14 +160,12 @@ public boolean ExecuteDel() throws SQLException  {
             }
             sql += sb.toString();
             sql += " );";
-            System.out.println(sql);
         
             try {
             	getConnection(false);
                 getConn();
             	sqlStatement = getConn().prepareStatement(sql);
-                
-                System.out.println(sqlStatement);
+            	
                 int x = 0;
                 for (int i = 0; i < getValues().getValues().length; i++) {
                     x = i;
@@ -187,7 +179,6 @@ public boolean ExecuteDel() throws SQLException  {
                 e.printStackTrace();
             }
         }
-        System.out.println(sqlStatement);
 
         return sqlStatement.execute();
     }
