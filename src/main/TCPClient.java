@@ -24,7 +24,6 @@ public class TCPClient {
 		System.out.println(password);
 		AU.setAuthUserEmail(email);
 		AU.setAuthUserPassword(password);
-		AU.setAuthUserIsAdmin(true);
 		
 		//DeleteCalendar DC = new DeleteCalendar();
 		//DC.setCalendarName("Din mors kalender");
