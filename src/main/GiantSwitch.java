@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import model.Forecast.Forecast;
 import model.Forecast.ForecastModel;
 import model.QOTD.QOTDModel;
+import model.calendar.Event;
 import model.calendar.GetCalendarData;
 import JsonClasses.AddUser;
 import JsonClasses.AuthUser;
@@ -88,7 +89,8 @@ public class GiantSwitch {
 			
 		case "getCalendar":
 			GetCalendar GC = (GetCalendar)gson.fromJson(jsonString, GetCalendar.class);
-			answer = GetCalendarData.getDataFromCalendar(GC.getcbsID());
+			String id = SW.findUserID(GC.getcbsID());
+			answer = GetCalendarData.getDataFromCalendar(GC.getcbsID(), id);
 			break;
 
 		case "getEvents":
@@ -96,7 +98,11 @@ public class GiantSwitch {
 			break;
 
 		case "createEvent":
-			System.out.println("Recieved saveEvent");
+			Event event = (Event)gson.fromJson(jsonString, Event.class);
+			String createdby = SW.findUserID(event.getCreatedby());
+			answer = SW.addNewEvent(event.getLocation(), createdby, event.getStart(), event.getEnd(), event.getTitle(),
+					event.getDescription());
+			System.out.println("Recieved createEvent");
 			break;
 
 		case "getEventInfo":

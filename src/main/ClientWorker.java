@@ -25,7 +25,6 @@ public class ClientWorker implements  Runnable{
 			
 			//Creates an object of the data which is to be send back to the client, via the connectionSocket
 			DataOutputStream outToClient = new DataOutputStream(connectionSocketConected.getOutputStream());
-			
 			//Sets client sentence equals input from client		
 			String ny = cryp.decrypt(b);
 			String answer = GS.GiantSwitchMethod(ny);

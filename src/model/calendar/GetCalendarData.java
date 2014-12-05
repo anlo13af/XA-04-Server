@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 /**
  * Created by jesperbruun on 13/10/14.
  */
@@ -37,20 +42,25 @@ public class GetCalendarData {
      * Allows client to retrieve CBS's calendar and then access it.
      * @throws Exception
      */
-    public static String getDataFromCalendar(String userID) throws Exception {
+    public static String getDataFromCalendar(String userID, String id) throws Exception {
 
         /**
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
          * Encrypt hash from
          */
+ 
     	//String userID = "alla13ad";
         String json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+e.getKey(userID)+".json");
         //String json = readUrl("http://calendar.cbs.dk/events.php/anli12ae/4ea5ca7d5f4a7475700a6508c5728cea.json");
      
-        //JsonParser parser = new JsonParser();
-        //JsonObject obj = parser.parse(json).getAsJsonObject();
-        //Gson gson = new Gson();
-        //Events events = gson.fromJson(obj, Events.class);
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(json).getAsJsonObject();
+        Gson gson = new Gson();
+        Events events = gson.fromJson(obj, Events.class);
+        events.getEvents(id);
+        
+        Gson toJson = new GsonBuilder().create();
+        json = toJson.toJson(events);
         return json;
         
         //tester events activityID's

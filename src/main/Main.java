@@ -12,11 +12,8 @@ public class Main {
 		
 		cf.ReadFile();
 		
-		//TCPServer server = new TCPServer();
-		
 		System.out.println(cf.getPassword());
 		
-		//new GUILogic().run();
 		new TCPServer().run();
 	}
 

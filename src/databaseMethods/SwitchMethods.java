@@ -2,6 +2,7 @@ package databaseMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Model;
 import model.QOTD.QOTDModel;
@@ -60,6 +61,34 @@ public class SwitchMethods extends Model {
 		// doUpdate("insert into test.calendar (Name, Active, CreatedBy, PrivatePublic) VALUES ('"+newCalendarName+"', '1', '"+userName+"', '"+publicOrPrivate+"');");
 	}
 
+	public String addNewEvent(String location, String createdBy,
+			ArrayList<String> start, ArrayList<String> end, String name,
+			String text) {
+		String stringStart = start.get(0) + "-" + start.get(1) + "-" + start.get(2) + " " + start.get(3) + ":" + start.get(4) + ":00";
+		String stringEnd = end.get(0) + "-" + end.get(1) + "-" + end.get(2) + " " + end.get(3) + ":" + end.get(4) + ":00";
+		String[] keys = { "location", "createdby", "start", "end", "name",
+				"text" };
+		String[] values = { location, createdBy, stringStart, stringEnd,
+				name, text };
+
+		try {
+			qb.insertInto("events", keys).values(values).execute();
+			return "0";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "1";
+		}
+	}
+	public String findUserID(String username) throws SQLException {
+		int id = 0;
+		ResultSet rs = qb.selectFrom("users").where("email", "=", username).ExecuteQuery();
+		while (rs.next()) {
+			id = rs.getInt("userid");
+		}
+		String sID = String.valueOf(id);
+		return sID;
+	}
+
 	public String addUser(String newUserEmail, String newUserPassword)
 			throws Exception {
 		System.out.println(newUserEmail);
@@ -68,20 +97,19 @@ public class SwitchMethods extends Model {
 				encryptionAES.encrypt(newUserPassword) };
 		ResultSet rs = qb.selectFrom("users").where("email", "=", newUserEmail)
 				.ExecuteQuery();
-		
+
 		if (rs.next()) {
-				return "2"; // Returnerer 2: brugernavn findes allerede.
-			} else {
-				try {
-					qb.insertInto("users", keys).values(values).execute();
-					return "0"; // Returnerer 0: brugeren er oprettet
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return "1"; // Returnerer 1: Brugeren blev ikke oprettet
-				}
+			return "2"; // Returnerer 2: brugernavn findes allerede.
+		} else {
+			try {
+				qb.insertInto("users", keys).values(values).execute();
+				return "0"; // Returnerer 0: brugeren er oprettet
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return "1"; // Returnerer 1: Brugeren blev ikke oprettet
 			}
 		}
-		
+	}
 
 	public String changePassword(String UserEmail, String newPassword)
 			throws Exception {

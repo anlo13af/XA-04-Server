@@ -66,7 +66,7 @@ public class Event {
     public String getCreatedby(){
         return createdby;
     }
-    
+ 
     public void setStart(ArrayList<String> start){
         this.start = start;
     }
