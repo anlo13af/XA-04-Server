@@ -47,11 +47,14 @@ public class GiantSwitch {
 		 ** LOGIN **
 		 **********/
 		case "logIn":
+			System.out.println("Received logIn");
 			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
 			try {
+				System.out.println("Logging in user: " + AU.getAuthUserEmail());
 				answer = Auth.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword());
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println("Login error!");
 			}
 			break;
 
@@ -87,9 +90,13 @@ public class GiantSwitch {
 			break;
 			
 		case "getCalendar":
+			System.out.println("Received getCalendar");
 			GetCalendar GC = (GetCalendar)gson.fromJson(jsonString, GetCalendar.class);
-			String id = SW.findUserID(GC.getcbsID());
-			answer = GetCalendarData.getDataFromCalendar(GC.getcbsID(), id);
+			String cbsID = GC.getcbsID();
+			String id = SW.findUserID(cbsID);
+			System.out.println("From user: " + cbsID);
+			answer = GetCalendarData.getDataFromCalendar(cbsID, id);
+			System.out.println("Returning calendar data for: " + cbsID + ", with ID: " + id);
 			break;
 
 		case "getEvents":
@@ -97,11 +104,13 @@ public class GiantSwitch {
 			break;
 
 		case "createEvent":
+			System.out.println("Recieved createEvent");
 			Event event = (Event)gson.fromJson(jsonString, Event.class);
 			String createdby = SW.findUserID(event.getCreatedby());
+			System.out.println("From userID: " + createdby);
 			answer = SW.addNewEvent(event.getLocation(), createdby, event.getStart(), event.getEnd(), event.getTitle(),
 					event.getDescription());
-			System.out.println("Recieved createEvent");
+			System.out.println("Event added!");
 			break;
 
 		case "getEventInfo":

@@ -18,8 +18,9 @@ public class Events {
 	public ArrayList<Event> getEvents(String id) {
 		QueryBuilder qb = new QueryBuilder();
 		try {
+			System.out.println("Getting events from database.");
 			ResultSet rs = qb.selectFrom("events").where("createdby", "=", id).ExecuteQuery();
-			System.out.println("qb select");
+			
 			while (rs.next()) {
 				// String values from SQL database (must be created)
 				int eventID = rs.getInt("eventid");
@@ -62,15 +63,10 @@ public class Events {
 
 				ArrayList<String> alEnd = new ArrayList<String>();
 				alEnd.add(stringEndDate + " " + stringEndTime);
-
-				/*String activityid, String eventid, String type, String title,
-			String description, String location, String createdby, ArrayList<String> start,
-			ArrayList<String> end*/
 				
 				events.add(new Event(stringEventID, stringEventID, stringType,
 						nameEvent, text, location, stringCreatedby, startArray, endArray));
 			}
-			System.out.println("tilføjet til events");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

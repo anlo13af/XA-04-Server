@@ -8,31 +8,14 @@ import java.sql.SQLException;
 
 public class DatabaseInit extends Model {
 
-    //Test main method
-    public static void main(String[] args) throws IOException, SQLException {
-        new DatabaseInit().go();
-    }
-
-
     public void go() throws SQLException, IOException {
 
-
-        /*String[] keys = {"firstKey", "secondKey"};
-        String[] whereparamters = {"alder", "hat"};
-        QueryBuilder qb = new QueryBuilder();
-        resultSet = qb.selectFrom("users").all().ExecuteQuery();
-        resultSet = qb.selectFrom(keys, "events").where("id", "=", "123").ExecuteQuery();
-
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("email"));
-        }
-        resultSet.close();*/
-
         if (doesDatabaseExist()) {
-            System.out.print("Database environment does exist");
+            System.out.print("Database environment does exist\n");
         } else {
-            System.out.print("Database environment does NOT exist");
-            readfromSqlFile("src/SQLFiles/createDBscript.sql");
+            System.out.print("Database environment does NOT exist\n");
+            readfromSqlFile("src/SQLFiles/cbscalendar.sql");
+            System.out.println("\n\nDatabase environment created!");
         }
 
     }

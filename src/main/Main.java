@@ -1,6 +1,8 @@
 package main;
 import java.io.IOException;
+import java.sql.SQLException;
 
+import model.database.DatabaseInit;
 import config.Configurations;
 
 public class Main {
@@ -12,7 +14,13 @@ public class Main {
 		cf.ReadFile();
 		
 		System.out.println(cf.getPassword());
+		DatabaseInit init = new DatabaseInit();
 		
+		try {
+			init.go();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		new TCPServer().run();
 	}
 

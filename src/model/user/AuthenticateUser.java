@@ -29,20 +29,25 @@ public class AuthenticateUser {
 
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
+			System.out.println("User found.");
 			// Hvis brugeren er aktiv
 			if(resultSet.getInt("active")==1)
 			{					
-				System.out.println("Brugeren er aktiv");
+				System.out.println("User is active.");
 				// Hvis passwords matcher
 				if(resultSet.getString("password").equals(encryptionAES.encrypt(password)))
 				{
+					System.out.println("Login succesful!");
 					return "0"; //returnerer "0" hvis brugeren er godkendt
 				} else {
+					System.out.println("Login failed: wrong password.");
 					return "3"; // returnerer fejlkoden "3" hvis password ikke matcher
 				}
 			} else {
+				System.out.println("Login failed: user is inactive.");
 				return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
 			}
-		} return "1"; // returnerer fejlkoden "1" hvis email ikke findes
+		} System.out.println("Login failed: user not found."); 
+		return "1"; // returnerer fejlkoden "1" hvis email ikke findes
 	} 
 }

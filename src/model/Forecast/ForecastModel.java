@@ -27,7 +27,6 @@ public class ForecastModel extends Model {
 	private String weatherDescription = "";
 	QueryBuilder qb = new QueryBuilder();
 
-	//
 	@SuppressWarnings("rawtypes")
 	public ArrayList<Forecast> requestForecast() throws SQLException {
 
@@ -40,7 +39,9 @@ public class ForecastModel extends Model {
 		String result = "";
 		// api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
 		try {
+			System.out.println("før");
 			qb.deleteFrom("dailyupdate").values(value).execute();
+			System.out.println("efter");
 			url = new URL(
 					"http://api.openweathermap.org/data/2.5/forecast?id=2618425&&mode=json&units=metric");
 			conn = (HttpURLConnection) url.openConnection();
