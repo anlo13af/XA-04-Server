@@ -1,7 +1,6 @@
 package main;
 import java.io.IOException;
 
-import GUI.GUILogic;
 import config.Configurations;
 
 public class Main {

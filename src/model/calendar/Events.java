@@ -18,7 +18,6 @@ public class Events {
 	public ArrayList<Event> getEvents(String id) {
 		QueryBuilder qb = new QueryBuilder();
 		try {
-			@SuppressWarnings("unused")
 			ResultSet rs = qb.selectFrom("events").where("createdby", "=", id).ExecuteQuery();
 			System.out.println("qb select");
 			while (rs.next()) {

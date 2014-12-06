@@ -7,7 +7,6 @@ import java.awt.Font;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -17,9 +16,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
-
-import javax.swing.border.MatteBorder;
-
 import java.awt.Cursor;
 
 import javax.swing.SwingConstants;
@@ -29,6 +25,7 @@ import java.awt.Dimension;
 import javax.swing.JPasswordField;
 
 public class Login extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private final JLabel lblWelcome = new JLabel("Welcome");
 	private final JLabel lblUsername = new JLabel("Username");
 	private final JLabel lblPassword = new JLabel("Password");

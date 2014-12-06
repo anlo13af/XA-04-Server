@@ -12,7 +12,6 @@ import JsonClasses.ChangePW;
 import JsonClasses.CreateCalendar;
 import JsonClasses.DeleteCalendar;
 import JsonClasses.GetCalendar;
-import JsonClasses.WeatherInfo;
 
 import com.google.gson.*;
 

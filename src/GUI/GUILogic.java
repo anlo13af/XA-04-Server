@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
-import GUI.UserInformation;
 import GUI.AuthUser;
 
 import javax.swing.JOptionPane;
@@ -15,7 +14,6 @@ import GUI.Screen;
 public class GUILogic {
 	private Screen screen;
 	private boolean u;
-	private boolean full = false;
 	
 	AuthUser a = new AuthUser();
 	
@@ -47,6 +45,7 @@ public class GUILogic {
 			try{
 				
 			String userName = screen.getLogin().getTextFieldUsername().getText();
+			@SuppressWarnings("deprecation")
 			String password = screen.getLogin().getTextFieldPassword().getText();
 			u=a.login(userName, password);
 			
@@ -118,7 +117,6 @@ public class GUILogic {
 				try {
 					qb.insertInto("events", kolonner ).values(Values).ExecuteQuery();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				}
@@ -128,6 +126,7 @@ public class GUILogic {
 		}
 	}
 	private class AddUserActionListener implements ActionListener {
+		@SuppressWarnings("unused")
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getAddUser().getBtnLogout()){
 				screen.show(Screen.LOGIN);
@@ -157,7 +156,6 @@ public class GUILogic {
 					qb.insertInto("users", kolonner ).values(Values).ExecuteQuery();
 					qb.insertInto("roles", kolonner ).values(Values).ExecuteQuery();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				}

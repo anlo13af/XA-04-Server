@@ -4,17 +4,16 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
 
 public class MainMenu extends JPanel {
-	private JLabel label;
+
+	private static final long serialVersionUID = 1L;
 	private JLabel lblMainMenu;
 	private JButton btnLogOut;
 	private JButton btnUserlist;

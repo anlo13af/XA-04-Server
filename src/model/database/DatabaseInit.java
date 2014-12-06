@@ -1,10 +1,9 @@
 package model.database;
 
 import model.Model;
-import model.QueryBuild.QueryBuilder;
+//import model.QueryBuild.QueryBuilder;
 
 import java.io.IOException;
-import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 public class DatabaseInit extends Model {
@@ -18,7 +17,7 @@ public class DatabaseInit extends Model {
     public void go() throws SQLException, IOException {
 
 
-        String[] keys = {"firstKey", "secondKey"};
+        /*String[] keys = {"firstKey", "secondKey"};
         String[] whereparamters = {"alder", "hat"};
         QueryBuilder qb = new QueryBuilder();
         resultSet = qb.selectFrom("users").all().ExecuteQuery();
@@ -27,7 +26,7 @@ public class DatabaseInit extends Model {
         while (resultSet.next()){
             System.out.println(resultSet.getString("email"));
         }
-        resultSet.close();
+        resultSet.close();*/
 
         if (doesDatabaseExist()) {
             System.out.print("Database environment does exist");

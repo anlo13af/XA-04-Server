@@ -2,7 +2,6 @@ package main;
 import java.io.IOException;
 import java.net.*;
 
-import GUI.GUILogic;
 
 class TCPServer{    
 	

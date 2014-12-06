@@ -1,20 +1,12 @@
 package main;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import JsonClasses.*;
-import model.QOTD.*;
-import model.calendar.Event;
-import model.calendar.Events;
-import model.calendar.GetCalendarData;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TCPClient2 {
@@ -26,6 +18,7 @@ public class TCPClient2 {
 
 	}
 	public static void switchy() throws Exception {
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather \n6:AddUser \n7:CBS Calendar");
 		int lol = scan.nextInt();
@@ -37,6 +30,7 @@ public class TCPClient2 {
 	public static void shit(int lol) throws Exception {
 		String gsonString;
 		Gson gson = new GsonBuilder().create();
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 
 		switch (lol){
@@ -116,9 +110,6 @@ public class TCPClient2 {
 
 
 	public static void gogogo(String go) throws Exception{
-		String modifiedSentence;
-		Gson gson = new GsonBuilder().create();
-
 		Socket clientSocket = new Socket("localhost", 8888);
 		DataOutputStream outToServer = new DataOutputStream(
 				clientSocket.getOutputStream());
@@ -132,8 +123,7 @@ public class TCPClient2 {
 		outToServer.flush();
 
 		byte[] b = new byte[500000];
-		int count = clientSocket.getInputStream().read(b);
-		ByteArrayInputStream bais = new ByteArrayInputStream(b);
+		clientSocket.getInputStream().read(b);
 		String ny = cryp.decrypt(b);
 		System.out.println(ny);
 

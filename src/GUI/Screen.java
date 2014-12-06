@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +9,7 @@ import java.awt.CardLayout;
 
 public class Screen extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	public static final String LOGIN = "name_276091497157488";
 	public static final String MAINMENU = "name_276416022878030";
 	public static final String USERINFO = "name_277892826656058";
@@ -20,7 +20,7 @@ public class Screen extends JFrame {
 	public static final String ADDEVENTGUI = "name_6308445225625";
 	public static final String ADDUSER = "name_10334207821613";
 	
-	private JPanel contentPane;
+	//private JPanel contentPane;
 	private final Login login = new Login();
 	private final MainMenu mainMenu = new MainMenu();
 	private final UserInfo userInfo = new UserInfo();

@@ -2,10 +2,8 @@ package GUI;
 
 import javax.swing.JPanel;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -21,7 +19,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 
 public class NoteList extends JPanel {
-	private JTable table;
+
+	private static final long serialVersionUID = 1L;
+	//private JTable table;
 	private final JLabel lblBackground = new JLabel("");
 	private JLabel lblHeader;
 	private JButton btnDelete;

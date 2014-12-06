@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -14,10 +13,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import java.awt.SystemColor;
 
 public class AddUser extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTextField textField_Email;
 	private JTextField textField_Type;
 	private JTextField textField_Password;
