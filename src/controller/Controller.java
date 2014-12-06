@@ -5,12 +5,13 @@ import java.sql.SQLException;
 
 import model.Model;
 
+/**
+ * Not used
+ */
 public class Controller extends Model {
 	
 	private PreparedStatement saveNotes = null;
-	
-//Jeg har lavet en test 
-	
+
 	public Controller() {
 		super();
 		

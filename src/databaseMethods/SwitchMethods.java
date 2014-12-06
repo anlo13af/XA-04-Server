@@ -8,7 +8,9 @@ import model.Model;
 import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
 import model.user.encryptionAES;
-
+/**
+ * Class that determines which action should be performed.
+ */
 public class SwitchMethods extends Model {
 	QueryBuilder qb = new QueryBuilder();
 	QOTDModel qm = new QOTDModel();
@@ -19,10 +21,9 @@ public class SwitchMethods extends Model {
 	 * @param userName
 	 * @param calendarName
 	 * @param privatePublic
-	 * @return
+	 * @return String with a message about the outcome of the request
 	 * @throws SQLException
 	 */
-
 	public String createNewCalendar(String userName, String calendarName,
 			int privatePublic) throws SQLException {
 		String stringToBeReturned = "";
@@ -36,7 +37,12 @@ public class SwitchMethods extends Model {
 
 		return stringToBeReturned;
 	}
-
+	/**
+	 * Determines whether a newly created calendar can be authenticated
+	 * @param newCalendarName
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean authenticateNewCalendar(String newCalendarName)
 			throws SQLException {
 		testConnection();
@@ -50,17 +56,31 @@ public class SwitchMethods extends Model {
 		}
 		return authenticate;
 	}
-
+	/**
+	 * Adds a new calendar to the database
+	 * @param newCalendarName
+	 * @param userName
+	 * @param publicOrPrivate
+	 * @throws SQLException
+	 */
 	public void addNewCalendar(String newCalendarName, String userName,
 			int publicOrPrivate) throws SQLException {
 		String[] keys = { "Name", "Active", "CreatedBy", "PrivatePublic" };
 		String[] values = { newCalendarName, "1", userName,
 				Integer.toString(publicOrPrivate) };
 		qb.insertInto("calendar", keys).values(values).execute();
-
-		// doUpdate("insert into test.calendar (Name, Active, CreatedBy, PrivatePublic) VALUES ('"+newCalendarName+"', '1', '"+userName+"', '"+publicOrPrivate+"');");
 	}
-
+	
+	/**
+	 * Adds a new event to the database.
+	 * @param location
+	 * @param createdBy
+	 * @param start
+	 * @param end
+	 * @param name
+	 * @param text
+	 * @return 0 or 1 depending on whether the calendar was added to the DB or not.
+	 */
 	public String addNewEvent(String location, String createdBy,
 			ArrayList<String> start, ArrayList<String> end, String name,
 			String text) {
@@ -79,6 +99,13 @@ public class SwitchMethods extends Model {
 			return "1";
 		}
 	}
+	
+	/**
+	 * Finds the userid for the user with the given username
+	 * @param username
+	 * @return The users userid
+	 * @throws SQLException
+	 */
 	public String findUserID(String username) throws SQLException {
 		int id = 0;
 		ResultSet rs = qb.selectFrom("users").where("email", "=", username).ExecuteQuery();
@@ -89,6 +116,13 @@ public class SwitchMethods extends Model {
 		return sID;
 	}
 
+	/**
+	 * Adds a new user to the DB
+	 * @param newUserEmail
+	 * @param newUserPassword
+	 * @return 0, 1 or 2 depending on whether the user was added, the username already exists or an sql error
+	 * @throws Exception
+	 */
 	public String addUser(String newUserEmail, String newUserPassword)
 			throws Exception {
 		System.out.println("Adding new user: " + newUserEmail);
@@ -114,6 +148,13 @@ public class SwitchMethods extends Model {
 		}
 	}
 
+	/**
+	 * Changes the users password
+	 * @param UserEmail
+	 * @param newPassword
+	 * @return 0 or 1 depending on whether the users password changed or not
+	 * @throws Exception
+	 */
 	public String changePassword(String UserEmail, String newPassword)
 			throws Exception {
 		String[] keys = { "password" };
@@ -145,7 +186,14 @@ public class SwitchMethods extends Model {
 
 		return stringToBeReturned;
 	}
-
+	
+	/**
+	 * Sets a users chosen calendar to inactive
+	 * @param userName
+	 * @param calendarName
+	 * @return String with a message of the outcome of the request.
+	 * @throws SQLException
+	 */
 	public String removeCalendar(String userName, String calendarName)
 			throws SQLException {
 		String stringToBeReturned = "";
@@ -181,15 +229,12 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
-	// Metoden faar email og password fra switchen (udtrukket fra en json) samt
-	// en boolean der skal saettes til true hvis det er serveren der logger paa,
-	// og false hvis det er en klient
 	/**
 	 * Allows the client to log in
 	 * 
 	 * @param email
 	 * @param password
-	 * @return
+	 * @return 0, 1, 2, 3 that represents different outcomes of the request.
 	 * @throws Exception
 	 */
 	public String authenticate(String email, String password) throws Exception {

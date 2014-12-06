@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Not used
+ */
 public class Configurations {
     private String host = "localhost";
     private String port = "3306";
@@ -24,10 +27,6 @@ public class Configurations {
     private String weather_lat;
     private String weather_lon;
     private String weather_future_in_days;
-
-    // Opret DB name
-    // Opret update time på QOTD
-
 
     public String getHost() {
         return host;

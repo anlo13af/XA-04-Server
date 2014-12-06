@@ -1,16 +1,18 @@
 package GUI;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
-import GUI.AuthUser;
 
 import javax.swing.JOptionPane;
 
-import model.QueryBuild.*;
-import GUI.Screen;
+import model.QueryBuild.QueryBuilder;
 
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class GUILogic {
 	private Screen screen;
 	private boolean u;

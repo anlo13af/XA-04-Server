@@ -1,5 +1,10 @@
 package GUI;
 
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class AuthUser {
 	public boolean login(String userName, String password)
 	{

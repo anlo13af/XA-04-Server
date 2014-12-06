@@ -1,29 +1,27 @@
 package GUI;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.Font;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.BevelBorder;
-
 import java.awt.Color;
 import java.awt.Cursor;
-
-import javax.swing.SwingConstants;
-
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private final JLabel lblWelcome = new JLabel("Welcome");

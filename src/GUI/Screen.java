@@ -1,12 +1,17 @@
 package GUI;
 
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
 
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class Screen extends JFrame {
 
 	private static final long serialVersionUID = 1L;

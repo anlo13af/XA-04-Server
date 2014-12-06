@@ -20,7 +20,9 @@ import java.awt.Component;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
-
+/**
+ * Not used
+ */
 public class AddCourse extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;

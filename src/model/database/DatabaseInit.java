@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class DatabaseInit extends Model {
-
+	/**
+	 * Creates the database environment if it doesn't already exist.
+	 * @throws SQLException
+	 * @throws IOException
+	 */
     public void go() throws SQLException, IOException {
 
         if (doesDatabaseExist()) {

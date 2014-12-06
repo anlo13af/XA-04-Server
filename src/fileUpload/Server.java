@@ -3,9 +3,14 @@ package fileUpload;
 import java.io.*;
 import java.net.*;
 
- 
+/**
+ * Not used
+ */
 class Server
 {
+	/**
+	 * @throws IOException
+	 */
     public void serverUpload () throws IOException
     {
     	//til at flytte filen fra project folder
@@ -22,7 +27,7 @@ class Server
         BufferedReader inReader = new BufferedReader(new InputStreamReader(sk.getInputStream()));
         BufferedWriter outReader = new BufferedWriter(new OutputStreamWriter(sk.getOutputStream()));
  
-        //læser filnavnet som vi vil upload
+        //laeser filnavnet som vi vil upload
         String filename = inReader.readLine();
  
         if ( !filename.equals(""))
@@ -87,7 +92,7 @@ class Server
     	    sk.close();   	    
     	    //luk serversocket
     	    server.close();
-    	    //sletter originalen så vi ikke har 2
+    	    //sletter originalen saa vi ikke har 2
     	    File1.delete();
     	    
     	}catch(IOException e){

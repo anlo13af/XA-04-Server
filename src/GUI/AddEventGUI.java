@@ -14,7 +14,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
 import java.awt.SystemColor;
-
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class AddEventGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField_Location;

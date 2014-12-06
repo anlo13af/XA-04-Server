@@ -2,6 +2,12 @@ package GUI;
 
 // Fig. 28.30: Person.java
 // Person class that represents an entry in an address book.
+
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class UserInformation
 {
   
