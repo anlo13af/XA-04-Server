@@ -39,9 +39,8 @@ public class ForecastModel extends Model {
 		String result = "";
 		// api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
 		try {
-			System.out.println("før");
 			qb.deleteFrom("dailyupdate").values(value).execute();
-			System.out.println("efter");
+			System.out.println("Getting weather data...");
 			url = new URL(
 					"http://api.openweathermap.org/data/2.5/forecast?id=2618425&&mode=json&units=metric");
 			conn = (HttpURLConnection) url.openConnection();
@@ -70,6 +69,7 @@ public class ForecastModel extends Model {
 			Iterator i = list.iterator();
 
 			// take each value from the json array separately
+			System.out.println("Inserting data into DB...");
 			while (i.hasNext()) {
 				String qotd = "";
 
@@ -112,6 +112,7 @@ public class ForecastModel extends Model {
 				forecastList.add(new Forecast(sh, temperature,
 						weatherDescription, qotd));
 			}
+			System.out.println("Done.");
 		} catch (ParseException ex) {
 			ex.printStackTrace();
 		} catch (NullPointerException ex) {

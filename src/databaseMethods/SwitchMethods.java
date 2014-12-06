@@ -91,7 +91,7 @@ public class SwitchMethods extends Model {
 
 	public String addUser(String newUserEmail, String newUserPassword)
 			throws Exception {
-		System.out.println(newUserEmail);
+		System.out.println("Adding new user: " + newUserEmail);
 		String[] keys = { "email", "active", "password" };
 		String[] values = { newUserEmail, "1",
 				encryptionAES.encrypt(newUserPassword) };
@@ -99,13 +99,16 @@ public class SwitchMethods extends Model {
 				.ExecuteQuery();
 
 		if (rs.next()) {
+			System.out.println("User not added, username " + newUserEmail + " already exists.");
 			return "2"; // Returnerer 2: brugernavn findes allerede.
 		} else {
 			try {
 				qb.insertInto("users", keys).values(values).execute();
+				System.out.println("User " + newUserEmail + " was added!");
 				return "0"; // Returnerer 0: brugeren er oprettet
 			} catch (SQLException e) {
 				e.printStackTrace();
+				System.out.println("SQL Error, user not added.");
 				return "1"; // Returnerer 1: Brugeren blev ikke oprettet
 			}
 		}
@@ -118,8 +121,10 @@ public class SwitchMethods extends Model {
 		try {
 			qb.update("users", keys, values).where("email", "=", UserEmail)
 					.execute();
+			System.out.println("Changed password for: " + UserEmail);
 			return "0"; // Returnerer 0: password er skiftet.
 		} catch (SQLException e) {
+			System.out.println("SQL Error, couldn't change password");
 			e.printStackTrace();
 			return "1"; // Returnerer 1: password blev ikke skiftet.
 		}

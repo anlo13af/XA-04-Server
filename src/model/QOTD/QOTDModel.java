@@ -89,14 +89,11 @@ public class QOTDModel {
 	 * will make it into a json object so it can be printed out to the client.
 	 */
 	public String getQuote() {
-		System.out.println("test");
 		String q = "";
 		saveQuote();
 		try {
-			System.out.println("select from");
 			resultSet = qb.selectFrom("dailyupdate").all().ExecuteQuery();
 			while (resultSet.next()) {
-				System.out.println("rs next");
 				q = resultSet.getString("qotd");
 			}
 		} catch (SQLException e) {

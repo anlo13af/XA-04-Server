@@ -40,14 +40,14 @@ public class GiantSwitch {
 		 ************/
 
 		case "importCalendar":
-			System.out.println("Recieved importCourse");
+			System.out.println("\nRecieved importCourse");
 			break;
 
 		/**********
 		 ** LOGIN **
 		 **********/
 		case "logIn":
-			System.out.println("Received logIn");
+			System.out.println("\nReceived logIn");
 			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
 			try {
 				System.out.println("Logging in user: " + AU.getAuthUserEmail());
@@ -59,15 +59,17 @@ public class GiantSwitch {
 			break;
 
 		case "logOut":
-			System.out.println("Recieved logOut");
+			System.out.println("\nRecieved logOut");
 			break;
 		
 		case "changePassword":
+			System.out.println("\nReceived changePassword");
 			ChangePW Change = (ChangePW)gson.fromJson(jsonString, ChangePW.class);
 			answer = SW.changePassword(Change.getEmail(), Change.getPassword());
 			break;
 		
 		case "addUser":
+			System.out.println("\nReceived addUser");
 			AddUser AddU = (AddUser)gson.fromJson(jsonString, AddUser.class);
 			answer = SW.addUser(AddU.getEmail(), AddU.getPassword());
 			break;
@@ -90,7 +92,7 @@ public class GiantSwitch {
 			break;
 			
 		case "getCalendar":
-			System.out.println("Received getCalendar");
+			System.out.println("\nReceived getCalendar");
 			GetCalendar GC = (GetCalendar)gson.fromJson(jsonString, GetCalendar.class);
 			String cbsID = GC.getcbsID();
 			String id = SW.findUserID(cbsID);
@@ -100,11 +102,11 @@ public class GiantSwitch {
 			break;
 
 		case "getEvents":
-			System.out.println("Recieved getEvents");
+			System.out.println("\nRecieved getEvents");
 			break;
 
 		case "createEvent":
-			System.out.println("Recieved createEvent");
+			System.out.println("\nRecieved createEvent");
 			Event event = (Event)gson.fromJson(jsonString, Event.class);
 			String createdby = SW.findUserID(event.getCreatedby());
 			System.out.println("From userID: " + createdby);
@@ -144,6 +146,7 @@ public class GiantSwitch {
 		 ************/
 
 		case "getWeather":
+			System.out.println("\nReceived getWeather");
 			Gson tojson = new GsonBuilder().create();
 			 ArrayList<Forecast> forecastList = fm.requestForecast();
 		        
