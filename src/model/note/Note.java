@@ -4,7 +4,11 @@ import java.sql.SQLException;
 
 import model.Model;
 import model.QueryBuild.*;
-
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class Note extends Model{
 	
 	NoteModel notes = new NoteModel(0, null, null, null, 0, 0);

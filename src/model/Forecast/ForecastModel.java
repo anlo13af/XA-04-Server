@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 /**
  * ForecastModel class
+ * 
  * @author andersliltorp
  *
  */
@@ -119,7 +120,7 @@ public class ForecastModel extends Model {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				//Adds each Forecast object to the array
+				// Adds each Forecast object to the array
 				forecastList.add(new Forecast(sh, temperature,
 						weatherDescription, qotd));
 			}
@@ -132,35 +133,5 @@ public class ForecastModel extends Model {
 
 		return forecastList;
 	}
-
-	// Henter vejrudsigten og gemmer de hentede data i en ArrayList
-	/*
-	 * public ArrayList<Forecast> getForecast() throws SQLException{
-	 * 
-	 * QueryBuilder qb = new QueryBuilder(); Date date = new Date(); // Current
-	 * date & time long maxTimeNoUpdate = 3600; // Maximum one hour with no
-	 * update
-	 * 
-	 * @SuppressWarnings({ "rawtypes", "unchecked" }) ArrayList<Forecast>
-	 * forecastFromDB = new ArrayList();
-	 * 
-	 * long date1 = date.getTime(); long date2 = date.getTime() -
-	 * maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
-	 * 
-	 * long timeSinceUpdate = 3599;
-	 * 
-	 * // if more than 1 hour ago, do update if(timeSinceUpdate > 3600){
-	 * System.out.println("yaaaaaaay"); // return fresh weather data return
-	 * this.requestForecast(); } else { // Query database and fetch existing
-	 * weather data from db ResultSet forecast = null; try { forecast =
-	 * qb.selectFrom("dailyupdate").where("msg_type", "=",
-	 * "forecast").ExecuteQuery(); // Method to add these ResultSet values to
-	 * ArrayList needs to be created return (ArrayList<Forecast>)
-	 * forecastFromDB; } catch (SQLException e) { e.printStackTrace(); }
-	 * 
-	 * //Do something nice with ResultSet in order to make it into an ArrayList
-	 * try { while(forecast.next()){ return forecastFromDB; } } catch
-	 * (SQLException e) { e.printStackTrace(); } return null; } }
-	 */
 
 }

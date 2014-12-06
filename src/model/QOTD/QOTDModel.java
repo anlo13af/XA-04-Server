@@ -13,6 +13,11 @@ import model.QueryBuild.QueryBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * QOTDModel class
+ * @author andersliltorp
+ *
+ */
 public class QOTDModel {
 
 	@SuppressWarnings("unused")
@@ -24,9 +29,11 @@ public class QOTDModel {
 	private ResultSet resultSet;
 
 	/**
-     *
-     */
-
+	 * readUrl method used to read weather data url
+	 * @param urlString
+	 * @return
+	 * @throws Exception
+	 */
 	private static String readUrl(String urlString) throws Exception {
 		BufferedReader reader = null;
 		try {
@@ -46,12 +53,12 @@ public class QOTDModel {
 	}
 
 	@SuppressWarnings("unused")
+	/**
+	 * saveQuote method used to parse the json string and get the quotes
+	 * @return quote
+	 */
 	public static String saveQuote() {
 
-		/**
-		 * getting text from website and putiing into string Making a new object
-		 * of JSON, and prints out quote
-		 */
 		String json;
 		String newquote = "";
 		try {
@@ -85,8 +92,8 @@ public class QOTDModel {
 	}
 
 	/**
-	 * Retrieve Quote from a website and put it into a String, Afterwards we
-	 * will make it into a json object so it can be printed out to the client.
+	 * getQuote method used to get quote from database
+	 * @return
 	 */
 	public String getQuote() {
 		String q = "";
@@ -102,6 +109,10 @@ public class QOTDModel {
 		return q;
 	}
 
+	/**
+	 * NOT CURRENTLY USED
+	 * updateQuote method used to update QOTD every one day
+	 */
 	public void updateQuote() {
 		Date date = new Date(); // Current date & time
 		long maxTimeNoUpdate = 86400; // Maximum one day with no update

@@ -9,7 +9,11 @@ package model.note;
  * 
  * 			ETA: 2 timer
  */
-
+/**
+ * Not used
+ * @author andersliltorp
+ *
+ */
 public class NoteModel {
 	
 	private int noteID;
