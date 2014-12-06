@@ -19,6 +19,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * ForecastModel class
+ * @author andersliltorp
+ *
+ */
 public class ForecastModel extends Model {
 
 	// Json parser to retrieve and map data from openweathermap.org
@@ -28,6 +33,11 @@ public class ForecastModel extends Model {
 	QueryBuilder qb = new QueryBuilder();
 
 	@SuppressWarnings("rawtypes")
+	/**
+	 * requestForecast method which gets a json string with weather data and parses it
+	 * @return ArrayList of Forecast objects
+	 * @throws SQLException
+	 */
 	public ArrayList<Forecast> requestForecast() throws SQLException {
 
 		URL url;
@@ -109,6 +119,7 @@ public class ForecastModel extends Model {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				//Adds each Forecast object to the array
 				forecastList.add(new Forecast(sh, temperature,
 						weatherDescription, qotd));
 			}

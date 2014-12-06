@@ -1,40 +1,72 @@
 package main;
+
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
+
+import JsonClasses.AddUser;
+import JsonClasses.AuthUser;
+import JsonClasses.CreateCalendar;
+import JsonClasses.DeleteCalendar;
+import JsonClasses.GetQuote;
+import JsonClasses.WeatherInfo;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import JsonClasses.*;
-
-import java.util.Scanner;
-
+/**
+ * TCPClient2 class, used for testing
+ * 
+ * @author andersliltorp
+ *
+ */
 public class TCPClient2 {
 	private static encryption cryp = new encryption();
 
-	public static void main (String [] args) throws Exception{
+	/**
+	 * Main method which runs the switchy() method.
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
+	public static void main(String[] args) throws Exception {
 
 		switchy();
 
 	}
+
+	/**
+	 * switchy() method which scans for user input, then runs go(int) method
+	 * with received input
+	 * 
+	 * @throws Exception
+	 */
 	public static void switchy() throws Exception {
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
-		System.out.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather \n6:AddUser \n7:CBS Calendar");
+		System.out
+				.println("1:CreateCalendar \n2:DeleteCalendar \n3:Login \n4:QOTD \n5:Weather \n6:AddUser \n7:CBS Calendar");
 		int lol = scan.nextInt();
-		//System.out.println("password?");
-		//String password = scan.nextLine();
-		shit(lol);
-
+		// System.out.println("password?");
+		// String password = scan.nextLine();
+		go(lol);
 	}
-	public static void shit(int lol) throws Exception {
+
+	/**
+	 * go method which sends a json string to the gogogo method, based on
+	 * received request
+	 * 
+	 * @param lol
+	 * @throws Exception
+	 */
+	public static void go(int lol) throws Exception {
 		String gsonString;
 		Gson gson = new GsonBuilder().create();
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 
-		switch (lol){
-		case 1 :
+		switch (lol) {
+		case 1:
 			System.out.println("Kalenders navn?");
 			String calendarName = scan.nextLine();
 			System.out.println("User name?");
@@ -47,7 +79,7 @@ public class TCPClient2 {
 			gogogo(gsonString);
 			break;
 
-		case 2 : 
+		case 2:
 			System.out.println("Kalenders navn?");
 			String calendarName1 = scan.nextLine();
 			System.out.println("User name?");
@@ -59,12 +91,12 @@ public class TCPClient2 {
 			gogogo(gsonString);
 			break;
 
-		case 3 :
+		case 3:
 			System.out.println("email?");
 			String email = scan.nextLine();
 			System.out.println("pass?");
 			String pass = scan.nextLine();
-			AuthUser AU = new AuthUser();			
+			AuthUser AU = new AuthUser();
 			AU.setAuthUserEmail(email);
 			AU.setAuthUserPassword(pass);
 			gsonString = gson.toJson(AU);
@@ -72,20 +104,20 @@ public class TCPClient2 {
 			gogogo(gsonString);
 			break;
 
-		case 4 :
-			GetQuote GQ = new GetQuote();			
+		case 4:
+			GetQuote GQ = new GetQuote();
 			gsonString = gson.toJson(GQ);
 			System.out.println(gsonString);
 			gogogo(gsonString);
 			break;
 
-		case 5 :
-			WeatherInfo WI = new WeatherInfo();			
+		case 5:
+			WeatherInfo WI = new WeatherInfo();
 			gsonString = gson.toJson(WI);
 			System.out.println(gsonString);
 			gogogo(gsonString);
 			break;
-			
+
 		case 6:
 			System.out.println("Ny bruger email: ");
 			String newUserEmail = scan.nextLine();
@@ -97,19 +129,25 @@ public class TCPClient2 {
 			gsonString = gson.toJson(AddU);
 			gogogo(gsonString);
 			break;
-		
+
 		case 7:
 			System.out.println("Indtast CBS ID: ");
 			String cbsID = scan.nextLine();
-			String a = "{\"serialVersionUID\":1,\"overallID\":\"" + "getCalendar"
-					+ "\",\"cbsID\":\"" + cbsID + "\"}";
+			String a = "{\"serialVersionUID\":1,\"overallID\":\""
+					+ "getCalendar" + "\",\"cbsID\":\"" + cbsID + "\"}";
 			gogogo(a);
 
 		}
 	}
 
-
-	public static void gogogo(String go) throws Exception{
+	/**
+	 * gogogo method which sends the received string to the server and receives
+	 * the answer from server
+	 * 
+	 * @param go
+	 * @throws Exception
+	 */
+	public static void gogogo(String go) throws Exception {
 		Socket clientSocket = new Socket("localhost", 8888);
 		DataOutputStream outToServer = new DataOutputStream(
 				clientSocket.getOutputStream());
@@ -127,10 +165,8 @@ public class TCPClient2 {
 		String ny = cryp.decrypt(b);
 		System.out.println(ny);
 
-
 		clientSocket.close();
 		switchy();
-
 
 	}
 }

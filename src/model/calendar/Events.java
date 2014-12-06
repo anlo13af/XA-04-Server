@@ -13,14 +13,22 @@ import model.QueryBuild.QueryBuilder;
  * Event
  */
 public class Events {
+	//Create arraylist to contain events
 	ArrayList<Event> events = new ArrayList<Event>();
 
+	/**
+	 * getEvents method which gets events for a given userid
+	 * @param id
+	 * @return ArrayList with all the user's events.
+	 */
 	public ArrayList<Event> getEvents(String id) {
 		QueryBuilder qb = new QueryBuilder();
 		try {
 			System.out.println("Getting events from database.");
+			//Gets events for the user with given ID from the database.
 			ResultSet rs = qb.selectFrom("events").where("createdby", "=", id).ExecuteQuery();
 			
+			//Cycle through events
 			while (rs.next()) {
 				// String values from SQL database (must be created)
 				int eventID = rs.getInt("eventid");
@@ -64,6 +72,7 @@ public class Events {
 				ArrayList<String> alEnd = new ArrayList<String>();
 				alEnd.add(stringEndDate + " " + stringEndTime);
 				
+				//Add events to arraylist
 				events.add(new Event(stringEventID, stringEventID, stringType,
 						nameEvent, text, location, stringCreatedby, startArray, endArray));
 			}
@@ -71,13 +80,20 @@ public class Events {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return events;
 	}
+	/**
+	 * Get events from CBS database
+	 * @return arraylist of events
+	 */
 	public ArrayList<Event> getCBSEvents() {
 		return events;
 	}
-
+	
+	/**
+	 * Sets events
+	 * @param event
+	 */
 	public void setEvents(ArrayList<Event> event) {
 		this.events = event;
 	}
@@ -87,19 +103,4 @@ public class Events {
 	public String toString() {
 		return Arrays.toString(events.toArray());
 	}
-
-	/*public static void main(String[] args) throws Exception {
-		GetCalendarData CalendarData = new GetCalendarData();
-		String data = CalendarData.getDataFromCalendar();
-		//Events calendarEvents = CalendarData.getDataFromCalendar();
-		//ArrayList<Event> calendarData = calendarEvents.getEvents();
-		
-		/*for (Event event : calendarData) {
-			System.out.println(event.getDescription());
-			System.out.println(event.getType());
-			System.out.println(event.getStart());
-			System.out.println(event.getEnd());
-			}*/
-		//System.out.println(data);
-	//}
 }

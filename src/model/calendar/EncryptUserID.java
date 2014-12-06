@@ -25,7 +25,7 @@ public class EncryptUserID {
         }
     }
 
-    // Enkryptere en tekst streng som bliver parset til funktionen
+    // Krypterer en tekst streng som bliver parset til funktionen
     public static String crypt(String str) {
         if (str == null || str.length() == 0) {
             throw new IllegalArgumentException("Error");
@@ -43,14 +43,6 @@ public class EncryptUserID {
         }
         return hexString.toString();
     }
-
-    //Quick example of how to get the hash.
-    /*public static void main(String[] args) {
-
-        System.out.print("Secret key: " + crypt(userId + HASHKEY));
-        String key = crypt(userId+ HASHKEY);
-
-    }*/
 
 	public String getKey(String userId) {
 		key = crypt(userId+HASHKEY);

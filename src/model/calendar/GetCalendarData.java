@@ -17,7 +17,12 @@ public class GetCalendarData {
 
 	static EncryptUserID e = new EncryptUserID();
 
-	// henter data fra URL og l??er ind til en string
+	/**
+	 * readUrl method to read data from CBS url
+	 * @param urlString
+	 * @return json string with CBS calendar data
+	 * @throws Exception
+	 */
 	private static String readUrl(String urlString) throws Exception {
 		BufferedReader reader = null;
 		try {
@@ -61,7 +66,8 @@ public class GetCalendarData {
 		JsonObject obj = parser.parse(json).getAsJsonObject();
 		Gson gson = new Gson();
 		Events events = gson.fromJson(obj, Events.class);
-
+		
+		//For each CBS event, increase the month value by 1, to match SQL data.
 		for (int i = 0; i < events.getCBSEvents().size(); i++) {
 			String[] fix = { events.getCBSEvents().get(i).getStart().get(1) };
 			String sfix = String.valueOf(fix[0]);
@@ -71,8 +77,10 @@ public class GetCalendarData {
 			sjovt.set(1, finalfix);
 			events.getCBSEvents().get(i).setStart(sjovt);
 		}
+		//Get (non-CBS) events from database
 		events.getEvents(id);
-
+		
+		//Convert to json string
 		Gson toJson = new GsonBuilder().create();
 		json = toJson.toJson(events);
 		return json;
