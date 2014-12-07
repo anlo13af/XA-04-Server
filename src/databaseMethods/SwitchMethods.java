@@ -115,6 +115,37 @@ public class SwitchMethods extends Model {
 		String sID = String.valueOf(id);
 		return sID;
 	}
+	
+	public String getNote(String id) {
+		String note = "no note";
+		ResultSet rs;
+		System.out.println("before select");
+		try {
+			rs = qb.selectFrom("notes").where("eventid", "=", id).ExecuteQuery();
+			System.out.println("after select");
+			if (rs.next()) {
+				System.out.println("inside if");
+				note = rs.getString("text");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return note;
+	}
+	
+	public String saveNote(String eventid, String text) throws SQLException {
+		ResultSet rs = qb.selectFrom("notes").where("eventid", "=", eventid).ExecuteQuery();
+		String[] keys = { "eventid", "text" };
+		String[] values = { eventid, text };
+		if (rs.next()) {
+			qb.update("notes", keys, values).where("eventid", "=", eventid).execute();
+			return "0"; //0 for updated note
+		} else {
+			qb.insertInto("notes", keys).values(values).execute();
+			return "1"; //1 for added note
+		}
+	}
 
 	/**
 	 * Adds a new user to the DB
