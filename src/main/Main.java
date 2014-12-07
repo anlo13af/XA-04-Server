@@ -2,6 +2,7 @@ package main;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import GUI.Console;
 import model.database.DatabaseInit;
 
 /**
@@ -23,6 +24,9 @@ public class Main {
 		cf.ReadFile();
 		
 		System.out.println(cf.getPassword());*/
+		GUI.Console console = new GUI.Console();
+		console.show();
+		System.setOut(console.getPs());
 		
 		DatabaseInit init = new DatabaseInit();
 		

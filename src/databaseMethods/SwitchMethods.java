@@ -101,10 +101,10 @@ public class SwitchMethods extends Model {
 	}
 	public String deleteEvent(String eventid) {
 		try {
+			qb.deleteFromWhere("notes").where("eventid", "=", eventid).execute();
 			qb.deleteFromWhere("events").where("eventid", "=", eventid).execute();
 			return "0";
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return "1";
 		}
 	}
@@ -128,17 +128,17 @@ public class SwitchMethods extends Model {
 	public String getNote(String id) {
 		String note = "no note";
 		ResultSet rs;
-		System.out.println("before select");
 		try {
+			System.out.println("Getting note from DB.");
 			rs = qb.selectFrom("notes").where("eventid", "=", id).ExecuteQuery();
-			System.out.println("after select");
 			if (rs.next()) {
-				System.out.println("inside if");
+				System.out.println("Returning note.");
 				note = rs.getString("text");
+			} else {
+				System.out.println("No note for event.");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Couldn't get note.");
 		}
 		return note;
 	}
@@ -148,12 +148,14 @@ public class SwitchMethods extends Model {
 		String[] keys = { "eventid", "text" };
 		String[] values = { eventid, text };
 		if (rs.next()) {
+			System.out.println("Updating note.");
 			qb.update("notes", keys, values).where("eventid", "=", eventid).execute();
 			return "0"; //0 for updated note
 		} else {
+			System.out.println("Creating new note.");
 			qb.insertInto("notes", keys).values(values).execute();
 			return "1"; //1 for added note
-		}
+		} 
 	}
 	
 	

@@ -48,7 +48,6 @@ public class GiantSwitch {
 		Gson gson = new GsonBuilder().create();
 		String answer = "";
 
-		System.out.println(jsonString);
 		// Creates a switch which determines which method should be used.
 		// Methods will be applied later on
 		switch (Determine(jsonString)) {
@@ -125,10 +124,9 @@ public class GiantSwitch {
 			break;
 			
 		case "deleteEvent":
-			System.out.println("Received deleteEvent");
+			System.out.println("\nReceived deleteEvent");
 			DeleteEvent del = (DeleteEvent) gson.fromJson(jsonString, DeleteEvent.class);
 			answer = SW.deleteEvent(del.getEventID());
-			System.out.println(answer);
 			break;
 
 		case "getCalendar":
@@ -155,24 +153,22 @@ public class GiantSwitch {
 			break;
 
 		case "saveNote":
-			System.out.println("Received saveNote");
+			System.out.println("\nReceived saveNote");
 			SaveNote savenote = (SaveNote) gson.fromJson(jsonString,
 					SaveNote.class);
 			answer = SW.saveNote(savenote.getEventID(), savenote.getNote());
 			break;
 
 		case "getNote":
-			System.out.println("Received getNote");
+			System.out.println("\nReceived getNote");
 			GetNote note = (GetNote) gson.fromJson(jsonString,
 					GetNote.class);
 			String nid = note.getEventID();
-			System.out.println(nid);
 			answer = SW.getNote(nid);
-			System.out.println(answer);
 			break;
 
 		case "deleteNote":
-			System.out.println("Received deleteNote");
+			System.out.println("\nReceived deleteNote");
 			break;
 
 		/**********
