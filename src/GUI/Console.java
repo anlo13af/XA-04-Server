@@ -13,7 +13,7 @@ public class Console extends JFrame {
 	private JTextArea textPane = new JTextArea();
 
 	public Console() {
-		setSize(310, 180);
+		setSize(400, 400);
 		getContentPane().setLayout(null);
 		
 		JPanel consolePanel = new JPanel();
@@ -22,7 +22,7 @@ public class Console extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane);
-		scrollPane.setBounds(10, 0, 294, 152);
+		scrollPane.setBounds(0, 0, 384, 362);
 		textPane.setBounds(0, 0, 310, 158);
 		scrollPane.setViewportView(textPane);
 		
