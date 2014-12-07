@@ -99,6 +99,15 @@ public class SwitchMethods extends Model {
 			return "1";
 		}
 	}
+	public String deleteEvent(String eventid) {
+		try {
+			qb.deleteFromWhere("events").where("eventid", "=", eventid).execute();
+			return "0";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "1";
+		}
+	}
 	
 	/**
 	 * Finds the userid for the user with the given username
@@ -146,6 +155,8 @@ public class SwitchMethods extends Model {
 			return "1"; //1 for added note
 		}
 	}
+	
+	
 
 	/**
 	 * Adds a new user to the DB

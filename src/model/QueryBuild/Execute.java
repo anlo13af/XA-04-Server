@@ -117,6 +117,13 @@ public boolean ExecuteDel() throws SQLException  {
             sqlStatement = getConn().prepareStatement(sql);
             sqlStatement.execute();
         	 
+        } else if (getQueryBuilder().isDeleteEvent()) {
+        	sql = "DELETE FROM cbscalendar.events WHERE " + getWhere().getWhereKey() + " " + getWhere().getWhereOperator()
+        			+ " " + getWhere().getWhereValue() + ";";
+        	getConnection(false);
+        	getConn();
+        	sqlStatement = getConn().prepareStatement(sql);
+        	sqlStatement.execute();
         }
         else if (getQueryBuilder().isSoftDelete()) {
             sql = UPDATE + getQueryBuilder().getTableName() + " SET active = 0" +

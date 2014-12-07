@@ -13,6 +13,7 @@ import JsonClasses.AuthUser;
 import JsonClasses.ChangePW;
 import JsonClasses.CreateCalendar;
 import JsonClasses.DeleteCalendar;
+import JsonClasses.DeleteEvent;
 import JsonClasses.GetCalendar;
 import JsonClasses.GetNote;
 import JsonClasses.SaveNote;
@@ -122,6 +123,13 @@ public class GiantSwitch {
 					event.getDescription());
 			System.out.println("Event added!");
 			break;
+			
+		case "deleteEvent":
+			System.out.println("Received deleteEvent");
+			DeleteEvent del = (DeleteEvent) gson.fromJson(jsonString, DeleteEvent.class);
+			answer = SW.deleteEvent(del.getEventID());
+			System.out.println(answer);
+			break;
 
 		case "getCalendar":
 			System.out.println("\nReceived getCalendar");
@@ -145,9 +153,6 @@ public class GiantSwitch {
 		case "getEventInfo":
 			System.out.println("Recieved getEventInfo");
 			break;
-
-		case "deleteEvent":
-			System.out.println("Received deleteEvent");
 
 		case "saveNote":
 			System.out.println("Received saveNote");

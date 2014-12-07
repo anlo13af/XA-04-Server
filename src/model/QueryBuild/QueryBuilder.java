@@ -9,6 +9,7 @@ public class QueryBuilder {
     private String tableName;
     private String fields;
     private boolean softDelete;
+    private boolean DeleteEvent;
     private boolean Delete;
     private boolean isUpdate;
     private boolean Insert;
@@ -24,6 +25,12 @@ public class QueryBuilder {
     }
     protected boolean isDelete(){
     	return Delete;
+    }
+    protected void setDeleteEvent(boolean b){
+    	this.DeleteEvent = b;
+    }
+    protected boolean isDeleteEvent(){
+    	return DeleteEvent;
     }
     protected void setInsert(boolean b){
     	this.Insert = b;
@@ -157,6 +164,14 @@ public class QueryBuilder {
         queryBuilder.setDelete(true);
         
         return new Values(queryBuilder);
+    }
+    
+    public Where deleteFromWhere(String tableName){
+        QueryBuilder queryBuilder = new QueryBuilder();
+        queryBuilder.setTableName(tableName);
+        queryBuilder.setDeleteEvent(true);
+        
+        return new Where(queryBuilder);
     }
 
 
