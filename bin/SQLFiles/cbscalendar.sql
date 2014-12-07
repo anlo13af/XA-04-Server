@@ -57,7 +57,7 @@ VALUES
 	(12,NULL,'Location',3,'2014-12-21 16:00:00','2014-12-21 19:00:00','Test event','Test',NULL),
 	(13,NULL,'Location',3,'2015-01-04 09:00:00','2015-01-04 11:00:00','Test event','Test',NULL),
 	(14,NULL,'Location',4,'2014-12-25 09:00:00','2014-12-25 14:00:00','Test event','Test',NULL),
-	(15,NULL,'Location',4,'2014-01-01 10:00:00','2014-01-01 12:00:00','Test event','Test',NULL),
+	(15,NULL,'Location',4,'2015-01-01 10:00:00','2015-01-01 12:00:00','Test event','Test',NULL),
 	(16,NULL,'Location',4,'2015-01-05 09:00:00','2015-01-05 14:00:00','Test event','Test',NULL);
 
 UNLOCK TABLES;
